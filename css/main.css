@@ -17,14 +17,20 @@ body {
 header {
   background: var(--secondary-color);
 }
-
 .nav {
+  border-bottom: solid 2px var(--main-color);
+  background: var(--secondary-color);
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+.links {
+  max-width: 1050px;
+  margin: auto;
   display: flex;
   justify-content: space-between;
-  max-width: 1100px;
-  margin: auto;
-  padding: 10px;
-  position: relative;
 }
 .nav-links {
   list-style: none;
@@ -51,13 +57,13 @@ header {
   display: none;
 }
 .landing {
-  height: 86vh;
-  margin-top: 2rem;
+  margin-top: 3.5rem;
   text-align: center;
+  min-height: 91vh;
 }
 .intro-wraper {
   display: flex;
-  max-width: 1100px;
+  max-width: 1050px;
   margin: auto;
   justify-content: space-between;
   align-items: center;
@@ -76,7 +82,8 @@ header {
   font-size: 1.5rem;
 }
 .contact-btn {
-  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-top: 2.8rem;
   padding: 0.8rem 1.5rem;
   font-size: 1.5rem;
   border: none;
@@ -86,7 +93,7 @@ header {
 
 /* media queries */
 @media screen and (max-width: 600px) {
-  .nav {
+  .links {
     flex-direction: column;
   }
   .burger {
@@ -95,17 +102,35 @@ header {
     cursor: pointer;
     position: absolute;
     right: 5%;
+    top: 10px;
   }
   .nav-links {
+    display: none;
+    width: 100%;
     flex-direction: column;
-    background: var(--secondary-color);
-    height: 100vh;
-
-    /* clip-path: circle(100px at 90% -10px);
-    -webkit-clip-path: circle(100px at 90% -10px);
-    transition: all 100ms ease-in; */
+    clip-path: circle(100px at 90% -16%);
+    -webkit-clip-path: circle(100px at 90% -16%);
+    pointer-events: none;
+  }
+  .nav-links.open {
+    display: flex;
+    clip-path: circle(1000px at 90% -16%);
+    -webkit-clip-path: circle(1000px at 90% -16%);
+    transition: all 150ms ease-in-out;
+    pointer-events: all;
   }
   .nav-link {
-    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* intro */
+  .intro-wraper {
+    flex-direction: column;
+  }
+  .title-intro {
+    font-size: 2.2rem;
+  }
+  .brief {
+    font-size: 1.5rem;
   }
 } ;
