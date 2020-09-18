@@ -3,18 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="css/main.css" />
     <title>MY BRAND</title>
   </head>
   <body>
-    <header>
+    <header id="home">
       <nav class="nav">
         <div class="links">
           <h1 class="title">My Brand</h1>
-          <ul class="nav-links closed">
-            <li class="nav-link"><a href="">Home</a></li>
-            <li class="nav-link"><a href="">About</a></li>
-            <li class="nav-link"><a href="">Project</a></li>
+          <ul class="nav-links">
+            <li class="nav-link"><a href="#home">Home</a></li>
+            <li class="nav-link"><a href="#about">About</a></li>
+            <li class="nav-link"><a href="#projects">Project</a></li>
             <li class="nav-link"><a href="">Blog</a></li>
             <li class="nav-link"><a href="">Contacts</a></li>
           </ul>
@@ -41,6 +45,129 @@
         <button class="contact-btn">Contact Me</button>
       </div>
     </header>
-    <script src="/js/app.js"></script>
+
+    <section class="about" id="about">
+      <h1 class="title-main">ABOUT ME</h1>
+      <div class="upper">
+        <div class="about-left">
+          <p class="about-text">
+            Hi, I’m <span> NSABIMANA Issa</span>. I am a Full stack web and
+            mobile app developer from Rwanda and javaScript is my favourite
+            language. I do free lancing and consultancy in Computer networking
+            and other IT related things, with 2+ years of experince.
+          </p>
+          <ul class="socials">
+            <li class="each-li">
+              <a href=""><i class="fa fa-github" aria-hidden="true"></i></a>
+            </li>
+            <li class="each-li">
+              <a href=""><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            </li>
+            <li class="each-li">
+              <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="my-pic">
+          <img src="images/my-pic.png" alt="" />
+        </div>
+      </div>
+      <h2 class="title-h2">LANGUAGES AND TECHNOLOGIES</h2>
+      <div class="down-skills">
+        <div class="cards-wrapper">
+          <div class="each-card">
+            <h2 class="title-main">Front End</h2>
+            <p>
+              Html,<br />
+              Css <br />
+              Bootstrap <br />
+              JavaScript <br />
+              React.js,Vue.js
+            </p>
+          </div>
+          <div class="each-card">
+            <h2 class="title-main">Back End</h2>
+            <p>
+              Node.js,<br />
+              Express <br />
+              Mongoose <br />
+              Knex <br />
+              Bcrypt node.js
+            </p>
+          </div>
+          <div class="each-card">
+            <h2 class="title-main">DataBase</h2>
+            <p>
+              Mongo Db,<br />
+              MySql <br />
+              Postgress <br />
+              Redis <br />
+            </p>
+          </div>
+          <div class="each-card">
+            <h2 class="title-main">Testing</h2>
+            <p>
+              Jest,<br />
+              Mocha <br />
+              Chai <br />
+              Istanbul <br />
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="projects" id="projects">
+      <h2 class="title-main">PORTFOLIO</h2>
+      <div class="projects-container">
+        <div class="each-project">
+          <div class="project-img">
+            <img src="images/afrinet.svg" alt="" />
+          </div>
+
+          <div class="left-text">
+            <h2>Afrinet Website</h2>
+            <p>
+              Afrinet’s Website is a company website that show its details and
+              services
+            </p>
+            <div class="btns">
+              <button class="visit"><a href="">Vist It</a></button>
+            </div>
+          </div>
+        </div>
+        <div class="each-project">
+          <div class="project-img">
+            <img src="images/smart-brain.svg" alt="" />
+          </div>
+
+          <div class="left-text">
+            <h2>Smart Brain</h2>
+            <p>Smart Brain is an app that can detect faces in a given image</p>
+            <div class="btns">
+              <button class="source-code"><a href=""> Codes</a></button>
+              <button class="visit"><a href="">Vist It</a></button>
+            </div>
+          </div>
+        </div>
+        <div class="each-project">
+          <div class="project-img">
+            <img src="images/port.svg" alt="" />
+          </div>
+
+          <div class="left-text">
+            <h2>My Brand</h2>
+            <p>
+              My Brand is composed by a personal website which has a blog and
+              users can coment, like and subscribe.
+            </p>
+            <div class="btns">
+              <button class="source-code"><a href=""> Codes</a></button>
+              <!-- <button class="visit"><a href="">Vist It</a></button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="js/app.js"></script>
   </body>
 </html>
