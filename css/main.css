@@ -178,10 +178,13 @@ header {
   align-items: center;
   padding-bottom: 2.4rem;
   padding-top: 2.4rem;
-  border-bottom: solid var(--special) 1px;
+  border-bottom: solid var(--main-color) 1px;
 }
 .projects-container :nth-child(even) {
   flex-direction: row-reverse;
+}
+.projects-container :last-child {
+  margin-bottom: 2rem;
 }
 .left-text p {
   font-size: 1.3rem;
@@ -193,11 +196,49 @@ a {
   font-size: 1.1rem;
 }
 .source-code,
-.visit {
+.visit,
+.visit-github {
   background: var(--secondary-color);
   padding: 0.6rem 2.3rem;
   border: none;
   border-radius: 5px;
+}
+.source-code:hover,
+.visit:hover,
+.visit-github:hover {
+  background: rgb(24, 23, 23);
+}
+.visit-github a {
+  color: var(--link-color);
+}
+/* projects */
+.blog-posts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 2rem;
+  margin-bottom: 2rem;
+}
+.each-post {
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 0 4px rgb(82, 78, 78);
+}
+.each-post:hover {
+  border: 1px solid var(--secondary-color);
+}
+.post-title {
+  color: var(--special);
+  font-weight: normal;
+  margin: 1rem 0;
+}
+.blog-btn {
+  width: 100%;
+}
+.post-img img {
+  width: 100%;
+}
+.visit-blog {
+  margin-bottom: 2rem;
 }
 
 /* media queries */
@@ -266,5 +307,13 @@ a {
   }
   .project-img img {
     width: 100%;
+  }
+  .blog-posts-container {
+    flex-direction: column;
+  }
+  .each-post {
+    margin-bottom: 1rem;
+    margin-right: 0;
+    text-align: center;
   }
 } ;
