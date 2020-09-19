@@ -2,18 +2,30 @@
   margin: 0;
   padding: 0;
 }
-html {
-  scroll-behavior: smooth;
-}
-body {
-  font-family: sans-serif;
-}
 :root {
   --main-color: #c4c4c4;
   --secondary-color: #383f58;
   --link-color: #00b0ff;
   --special: rgb(78, 78, 78);
 }
+html {
+  scroll-behavior: smooth;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: 0 0 2px rgb(3, 6, 145);
+  background-color: var(--main-color);
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 1px;
+  background: var(--secondary-color);
+}
+body {
+  font-family: sans-serif;
+}
+
 .title {
   color: var(--link-color);
   font-size: 2rem;
@@ -29,6 +41,7 @@ header {
   top: 0;
   right: 0;
   left: 0;
+  z-index: 2;
 }
 .links {
   max-width: 1050px;
@@ -245,8 +258,8 @@ a {
   position: relative;
 }
 .upper-bg {
-  height: 17rem;
-  background: var(--main-color);
+  height: 15rem;
+  /* background: var(--main-color); */
 }
 .bottom-bg {
   height: 17rem;
@@ -280,6 +293,10 @@ textarea {
   border: none;
   margin-bottom: 2rem;
 }
+input:hover,
+textarea:hover {
+  box-shadow: 1px 0 4px var(--secondary-color);
+}
 
 .submit {
   background-color: var(--secondary-color);
@@ -292,6 +309,27 @@ textarea {
   font-size: 1.2rem;
   cursor: pointer;
 }
+/* footer */
+
+footer {
+  background: var(--secondary-color);
+  color: var(--main-color);
+  text-align: center;
+  padding-bottom: 1rem;
+}
+footer i,
+span {
+  color: var(--link-color);
+}
+.title-footer {
+  padding-top: 1rem;
+  color: var(--main-color);
+  font-size: 1.4rem;
+}
+footer ul {
+  margin: 0;
+}
+
 /* media queries */
 @media screen and (max-width: 600px) {
   .links {
@@ -372,4 +410,4 @@ textarea {
     margin: 0.7rem;
     top: 9%;
   }
-} ;
+}
