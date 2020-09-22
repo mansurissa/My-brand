@@ -332,6 +332,65 @@ footer ul {
   margin: 0;
 }
 
+/* ===== Login page ===== */
+.login {
+  background: var(--secondary-color);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.login-page {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  padding: 1.5rem;
+  margin: auto;
+  border-radius: 6px;
+  box-shadow: 0 0 25px rgb(54, 46, 65);
+  border-bottom: 5px var(--link-color) solid;
+  border-top: 5px rgb(165, 167, 168) solid;
+}
+.login-page input {
+  background: var(--main-color);
+}
+.login-page input:hover {
+  border: none;
+  /* border-bottom: 2px black solid; */
+  background: white;
+}
+.loginbtn {
+  color: var(--link-color);
+  border: 1px solid var(--link-color);
+  background: var(--secondary-color);
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.title-login {
+  color: var(--link-color);
+  margin-bottom: 2rem;
+}
+.loginbtn:hover {
+  background: var(--link-color);
+  color: var(--secondary-color);
+}
+.social-login {
+  margin: 2rem;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.login-page a {
+  font-size: 1.6rem;
+  margin: 2rem;
+}
+.login-page a:hover {
+  color: var(--link-color);
+}
+
 /* media queries */
 @media screen and (max-width: 600px) {
   .links {
@@ -414,5 +473,9 @@ footer ul {
   form {
     margin: 0.7rem;
     top: 9%;
+  }
+  /* login */
+  .login-page a {
+    margin: 1.8rem;
   }
 }
