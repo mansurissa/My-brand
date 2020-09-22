@@ -146,10 +146,11 @@ header {
   padding-bottom: 0.5rem;
 }
 .cards-wrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   max-width: 1050px;
   margin: auto;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 .cards-wrapper :last-child {
   border-right: none;
@@ -226,15 +227,16 @@ a {
 }
 /* projects */
 .blog-posts-container {
+  max-width: 900px;
+  margin: 2rem auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 2rem;
-  margin-bottom: 2rem;
 }
 .each-post {
   padding: 1rem;
   border-radius: 5px;
-  box-shadow: 0 0 4px rgb(82, 78, 78);
+  box-shadow: 1px 1px 20px black;
 }
 .each-post:hover {
   border: 1px solid var(--secondary-color);
@@ -399,6 +401,9 @@ footer ul {
   }
   .blog-posts-container {
     flex-direction: column;
+  }
+  .last-posts {
+    margin-bottom: 2rem;
   }
   .each-post {
     margin-bottom: 1rem;
