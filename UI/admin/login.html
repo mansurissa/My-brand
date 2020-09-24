@@ -11,7 +11,7 @@
     <title>LOGIN</title>
   </head>
   <body class="login">
-    <div class="login-page">
+    <form class="login-page">
       <h1 class="title-login">LOGIN</h1>
       <input type="email" name="email" placeholder="Please enter your email" />
       <input
@@ -19,19 +19,54 @@
         name="password"
         placeholder="Please enter your passwords"
       />
-      <button class="loginbtn" type="button">LOGIN</button>
+      <button class="loginbtn" type="submit">LOGIN</button>
 
       <ul class="social-login">
         <li class="each-social">
-          <a href=""><i class="fa fa-google" aria-hidden="true"></i></a>
+          <a href="#" onclick="oAuth2Login('google')"
+            ><i class="fa fa-google" aria-hidden="true"></i
+          ></a>
         </li>
         <li class="each-social">
-          <a href=""><i class="fa fa-github" aria-hidden="true"></i></a>
+          <a href="#" onclick="oAuth2Login('github')"
+            ><i class="fa fa-github" aria-hidden="true"></i
+          ></a>
         </li>
         <li class="each-social">
-          <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
+          <a href="#" onclick="oAuth2Login('fb')"
+            ><i class="fa fa-facebook" aria-hidden="true"></i
+          ></a>
         </li>
       </ul>
-    </div>
+    </form>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script>
+    <script src="/UI/js/firebase.js"></script>
+    <script>
+      auth = firebase.auth();
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          location.href = "dashboard.html";
+        }
+      });
+
+      const form = document.querySelector(".login-page");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        auth
+          .signInWithEmailAndPassword(form.email.value, form.password.value)
+          .catch(console.log);
+      });
+      const Providers = {
+        google: "GoogleAuthProvider",
+        github: "GithubAuthProvider",
+        fb: "FacebookAuthProvider",
+      };
+      function oAuth2Login(src) {
+        const provider = new firebase.auth[Providers[src]]();
+        auth.signInWithPopup(provider).catch(console.log);
+      }
+    </script>
   </body>
 </html>

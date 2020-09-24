@@ -305,8 +305,8 @@ textarea:hover {
   background-color: var(--secondary-color);
   color: var(--link-color);
   padding: 0.7rem 2rem;
-  max-width: 50%;
-  margin: auto;
+  /* max-width: 50%; */
+  /* margin: auto; */
   border: none;
   border-radius: 5px;
   font-size: 1.2rem;
@@ -344,13 +344,14 @@ footer ul {
   text-align: center;
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  max-width: 350px;
   padding: 1.5rem;
   margin: auto;
   border-radius: 6px;
   box-shadow: 0 0 25px rgb(54, 46, 65);
   border-bottom: 5px var(--link-color) solid;
   border-top: 5px rgb(165, 167, 168) solid;
+  background: transparent;
 }
 .login-page input {
   background: var(--main-color);
@@ -393,8 +394,83 @@ footer ul {
   color: var(--link-color);
 }
 
+/* =====dashboard nav */
+.avatar {
+  border-radius: 200px;
+  width: 40px;
+  height: 40px;
+  margin-left: 2.5rem;
+  /* border: 2px var(--link-color) solid; */
+}
+a.active {
+  color: var(--link-color);
+}
+
+/* ===queries */
+.queries-h2 {
+  margin-top: 6rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.queries-container {
+  margin: 1rem auto;
+  max-width: 700px;
+}
+.single-query {
+  border-radius: 5px;
+  box-shadow: 0 0 3px black;
+  padding: 0.5rem 1rem;
+  margin: 0 1rem;
+  margin-bottom: 1.2rem;
+}
+.disp-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.7rem 0;
+}
+.commenter-name {
+  text-transform: capitalize;
+  font-size: 1.5rem;
+}
+.delete-query {
+  font-size: 1.5rem;
+  color: var(--secondary-color);
+}
+.delete-query:hover {
+  color: var(--link-color);
+}
+.sender-email {
+  color: var(--secondary-color);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+/* == form validation */
+.success {
+  text-align: center;
+  padding: 1rem;
+  color: rgb(18, 194, 18);
+}
+.invalidMsg {
+  text-align: center;
+  padding: 1rem;
+  color: rgb(248, 15, 15);
+}
+/* == new post and edit */
+.create-blog-post {
+  max-width: 700px;
+  background-color: rgb(223, 228, 223);
+}
+.create-btn {
+  margin-top: 1.5rem;
+}
+
 /* media queries */
+
 @media screen and (max-width: 600px) {
+  .avatar {
+    margin-left: 0;
+  }
   .links {
     flex-direction: column;
   }

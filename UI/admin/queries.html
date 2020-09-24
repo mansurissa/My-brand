@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="../css/main.css" />
+    <title>Queries</title>
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="links">
+        <h1 class="title">My Brand</h1>
+        <ul class="nav-links">
+          <li class="nav-link"><a href="./dashboard.html">Dashboard</a></li>
+          <li class="nav-link"><a href="./newPost.html">New Post</a></li>
+          <li class="nav-link"><a href="" class="logout">logout</a></li>
+          <li class="nav-link"><a href="" class="active">Queries</a></li>
+          <li class="nav-link">
+            <a href="/UI//admin/login.html"
+              ><img src="/UI/images/my-pic.png" class="avatar" alt="profile" />
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="burger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </nav>
+
+    <h2 class="title-main queries-h2">This is what you got from vistors</h2>
+    <hr />
+    <section class="queries-container">
+      <!-- <div class="single-query">
+        <div class="disp-flex">
+          <h2 class="title commenter-name">name</h2>
+          <p class="time">3 day ago</p>
+        </div>
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias
+          molestiae praesentium expedita. Alias, quas quod. Delectus
+          perspiciatis quasi cupiditate magnam cumque corporis maxime nisi sit
+        </p>
+        <div class="disp-flex">
+          <p class="sender-email">tester@gmail.com</p>
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+        </div>
+      </div> -->
+    </section>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="/UI/js/firebase.js"></script>
+    <script src="/UI/js/app.js"></script>
+    <script>
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+      const logout = document.querySelector(".logout");
+      const queries = document.querySelector(".queries-container");
+
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+        } else {
+          location.href = "login.html";
+        }
+      });
+      logout.addEventListener("click", (e) => {
+        e.preventDefault();
+        auth.signOut().catch(console.log);
+      });
+
+      db.collection("Queries").onSnapshot((results) => {
+        let html = "";
+        results.forEach((doc) => {
+          html += `<div class="single-query">
+        <div class="disp-flex">
+          <h2 class="title commenter-name">${doc.data().name}</h2>
+          <p class="time">${moment(doc.data().time).fromNow()}</p>
+        </div>
+        <p>
+          ${doc.data().message}
+        </p>
+        <div class="disp-flex">
+          <p class="sender-email"><em>${doc.data().email}</em></p>
+          <i class="fa fa-trash-o delete-query" aria-hidden="true" onclick="deleteQuery('${
+            doc.id
+          }')"></i>
+        </div>
+      </div>`;
+        });
+        queries.innerHTML = html;
+      });
+
+      function deleteQuery(id) {
+        db.collection("Queries")
+          .doc(id)
+          .delete()
+          .then(function () {
+            console.log("Document successfully deleted!");
+          })
+          .catch(console.log);
+      }
+    </script>
+  </body>
+</html>

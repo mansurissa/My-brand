@@ -7,7 +7,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="/UI/css/main.css" />
+    <link rel="stylesheet" href="./css/main.css" />
     <title>MY BRAND</title>
   </head>
   <body>
@@ -22,7 +22,7 @@
             <li class="nav-link"><a href="#blog">Blog</a></li>
             <li class="nav-link"><a href="#contacts">Contacts</a></li>
             <li class="nav-link">
-              <a href="/UI//admin/login.html"
+              <a href="./admin/login.html"
                 ><span><i class="fa fa-sign-in" aria-hidden="true"></i></span>
                 Login</a
               >
@@ -38,7 +38,7 @@
       <div class="landing">
         <div class="intro-wraper">
           <div class="intro-pic">
-            <img src="UI/images/intro svg.svg" alt="svg" class="svg" />
+            <img src="./images/intro svg.svg" alt="svg" class="svg" />
           </div>
           <div class="intro">
             <h1 class="title-intro">FULL STACK WEB AND MOBILE APP DEVELOPER</h1>
@@ -89,7 +89,7 @@
           </ul>
         </div>
         <div class="my-pic">
-          <img src="/UI/images/my-pic.png" alt="" />
+          <img src="./images/my-pic.png" alt="" />
         </div>
       </div>
       <h2 class="title-h2">LANGUAGES AND TECHNOLOGIES</h2>
@@ -141,7 +141,7 @@
       <div class="projects-container">
         <div class="each-project">
           <div class="project-img">
-            <img src="/UI/images/afrinet.svg" alt="" />
+            <img src="./images/afrinet.svg" alt="" />
           </div>
 
           <div class="left-text">
@@ -161,7 +161,7 @@
         </div>
         <div class="each-project">
           <div class="project-img">
-            <img src="/UI/images/smart-brain.svg" alt="" />
+            <img src="./images/smart-brain.svg" alt="" />
           </div>
 
           <div class="left-text">
@@ -188,7 +188,7 @@
         </div>
         <div class="each-project">
           <div class="project-img">
-            <img src="/UI/images/port.svg" alt="" />
+            <img src="./images/port.svg" alt="" />
           </div>
 
           <div class="left-text">
@@ -223,7 +223,7 @@
       <div class="blog-posts-container">
         <div class="each-post">
           <div class="post-img">
-            <img src="/UI/images/placeholder.png" alt="blog" />
+            <img src="./images/placeholder.png" alt="blog" />
           </div>
           <h3 class="post-title">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
@@ -232,35 +232,7 @@
         </div>
         <div class="each-post">
           <div class="post-img">
-            <img src="/UI/images/placeholder.png" alt="blog" />
-          </div>
-          <h3 class="post-title">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-          </h3>
-          <div class="icons"></div>
-          <button class="visit blog-btn"><a href="">Read More</a></button>
-        </div>
-        <div class="each-post">
-          <div class="post-img">
-            <img src="/UI/images/placeholder.png" alt="blog" />
-          </div>
-          <h3 class="post-title">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-          </h3>
-          <button class="visit blog-btn"><a href="">Read More</a></button>
-        </div>
-        <div class="each-post">
-          <div class="post-img">
-            <img src="/UI/images/placeholder.png" alt="blog" />
-          </div>
-          <h3 class="post-title">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-          </h3>
-          <button class="visit blog-btn"><a href="">Read More</a></button>
-        </div>
-        <div class="each-post">
-          <div class="post-img">
-            <img src="/UI/images/placeholder.png" alt="blog" />
+            <img src="./images/placeholder.png" alt="blog" />
           </div>
           <h3 class="post-title">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
@@ -270,7 +242,35 @@
         </div>
         <div class="each-post">
           <div class="post-img">
-            <img src="/UI/images/placeholder.png" alt="blog" />
+            <img src="./images/placeholder.png" alt="blog" />
+          </div>
+          <h3 class="post-title">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+          </h3>
+          <button class="visit blog-btn"><a href="">Read More</a></button>
+        </div>
+        <div class="each-post">
+          <div class="post-img">
+            <img src="./images/placeholder.png" alt="blog" />
+          </div>
+          <h3 class="post-title">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+          </h3>
+          <button class="visit blog-btn"><a href="">Read More</a></button>
+        </div>
+        <div class="each-post">
+          <div class="post-img">
+            <img src="./images/placeholder.png" alt="blog" />
+          </div>
+          <h3 class="post-title">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+          </h3>
+          <div class="icons"></div>
+          <button class="visit blog-btn"><a href="">Read More</a></button>
+        </div>
+        <div class="each-post">
+          <div class="post-img">
+            <img src="./images/placeholder.png" alt="blog" />
           </div>
           <h3 class="post-title">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
@@ -285,27 +285,31 @@
     <section class="contact-page" id="contacts">
       <div class="upper-bg"></div>
       <div class="bottom-bg"></div>
-      <form>
+      <form class="contact-form">
         <h2 class="title-main">CONTACT ME</h2>
+        <div class="success"></div>
         <input
           type="text"
+          name="name"
           class="name"
           placeholder="Please Enter your Name..."
         />
         <input
           type="text"
           class="email"
+          name="email"
           placeholder="Please Enter your Email..."
         />
         <textarea name="message" placeholder="Your Valuable Message"></textarea>
-        <button class="submit" type="button">Submit</button>
+        <button class="submit" type="submit">Submit</button>
+        <p class="invalidMsg"></p>
       </form>
     </section>
     <footer>
       <h2 class="title-footer">Reach Me On</h2>
       <ul class="socials">
         <li class="each-li">
-          <a href="https://github.com/mansurissa" target="#blank"
+          <a href="https://github.com/mansurissa" target="_blank"
             ><i class="fa fa-github" aria-hidden="true"></i
           ></a>
         </li>
@@ -324,6 +328,53 @@
       </ul>
       <p class="footer-msg">Made with Full Focus by <span>Issa</span></p>
     </footer>
-    <script src="/UI/js/app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+    <script src="./js/firebase.js"></script>
+    <script src="./js/app.js"></script>
+
+    <script>
+      const db = firebase.firestore();
+      const contactForm = document.querySelector(".contact-form");
+
+      const invalidMsg = document.querySelector(".invalidMsg");
+      const validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      const checkValidation = () => {
+        if (!contactForm.email.value.match(validEmail)) {
+          invalidMsg.innerHTML = `<i class="fa fa-times-circle" aria-hidden="true"></i> Please Enter a valid email`;
+        } else if (contactForm.name.value == "") {
+          invalidMsg.innerHTML = `<i class="fa fa-times-circle" aria-hidden="true"></i> Your best name is needed`;
+        } else if (contactForm.message.value == "") {
+          invalidMsg.innerHTML = `<i class="fa fa-times-circle" aria-hidden="true"></i>Oooh your message please..`;
+        } else {
+          return true;
+        }
+      };
+
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (checkValidation()) {
+          db.collection("Queries")
+            .doc()
+            .set({
+              name: contactForm.name.value,
+              email: contactForm.email.value,
+              message: contactForm.message.value,
+              time: Date.now(),
+            })
+
+            .then(() => {
+              contactForm.name.value = "";
+              contactForm.email.value = "";
+              contactForm.message.value = "";
+              invalidMsg.innerHTML = "";
+              document.querySelector(
+                ".success"
+              ).innerHTML = `<p class="success"><i class="fa fa-check" aria-hidden="true"></i>Successfully sent! Thanks.</p>`;
+            })
+            .catch(console.log);
+        }
+      });
+    </script>
   </body>
 </html>
