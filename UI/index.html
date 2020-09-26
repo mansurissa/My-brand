@@ -353,6 +353,9 @@
 
       contactForm.addEventListener("submit", (e) => {
         e.preventDefault();
+        // setTimeout(() => {
+        //   document.querySelector(".invalidMsg").style.display = "none";
+        // }, 5000);
         if (checkValidation()) {
           db.collection("Queries")
             .doc()
@@ -373,6 +376,9 @@
               ).innerHTML = `<p class="success"><i class="fa fa-check" aria-hidden="true"></i>Successfully sent! Thanks.</p>`;
             })
             .catch(console.log);
+          setTimeout(() => {
+            document.querySelector(".success").style.display = "none";
+          }, 5000);
         }
       });
     </script>

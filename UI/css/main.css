@@ -457,12 +457,86 @@ a.active {
   color: rgb(248, 15, 15);
 }
 /* == new post and edit */
+.uploader {
+  max-width: 50%;
+  margin-bottom: 1rem;
+}
 .create-blog-post {
   max-width: 700px;
   background-color: rgb(223, 228, 223);
 }
 .create-btn {
   margin-top: 1.5rem;
+}
+.imgPreview {
+  max-width: 500px;
+  max-height: 600px;
+  margin: auto;
+}
+.preview {
+  max-width: 100%;
+  max-height: 100%;
+}
+/* ===dashobard contents */
+.overview-wrapper {
+  background: var(--secondary-color);
+}
+.over-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-gap: 1rem;
+  padding: 6rem 1.5rem 1rem 1.5rem;
+  max-width: 800px;
+  margin: auto;
+}
+.card-over-view {
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 0.6rem;
+  border-radius: 2px;
+  box-shadow: 0 0 18px rgb(65, 64, 64);
+}
+.posts {
+  color: rgb(96, 2, 105);
+}
+.comments {
+  color: rgb(101, 7, 129);
+}
+.likes {
+  color: rgb(63, 81, 243);
+}
+.subs {
+  color: rgb(209, 8, 236);
+}
+.views {
+  color: rgb(117, 79, 167);
+}
+.queries {
+  color: rgb(8, 171, 236);
+}
+.bottom-icons {
+  display: flex;
+  justify-content: space-around;
+}
+.right {
+  font-size: 0.9rem;
+  margin-left: 0.4rem;
+}
+.posts-tags {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+.business {
+  color: #0400ff;
+  margin: 0.4rem;
+}
+.tech {
+  color: #e100ff;
+  margin: 0.4rem;
 }
 
 /* media queries */
