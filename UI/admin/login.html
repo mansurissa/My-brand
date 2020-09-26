@@ -3,19 +3,70 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/UI/css/main.css" />
     <title>LOGIN</title>
   </head>
-  <body>
-    <div class="login-page">
-      <h1 class="title">LOGIN</h1>
+  <body class="login">
+    <form class="login-page">
+      <h1 class="title-login">LOGIN</h1>
       <input type="email" name="email" placeholder="Please enter your email" />
       <input
         type="password"
         name="password"
         placeholder="Please enter your passwords"
       />
-      <button class="submit" type="button">Submit</button>
-    </div>
+      <button class="loginbtn" type="submit">LOGIN</button>
+
+      <ul class="social-login">
+        <li class="each-social">
+          <a href="#" onclick="oAuth2Login('google')"
+            ><i class="fa fa-google" aria-hidden="true"></i
+          ></a>
+        </li>
+        <li class="each-social">
+          <a href="#" onclick="oAuth2Login('github')"
+            ><i class="fa fa-github" aria-hidden="true"></i
+          ></a>
+        </li>
+        <li class="each-social">
+          <a href="#" onclick="oAuth2Login('fb')"
+            ><i class="fa fa-facebook" aria-hidden="true"></i
+          ></a>
+        </li>
+      </ul>
+    </form>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script>
+    <script src="/UI/js/firebase.js"></script>
+    <script>
+      auth = firebase.auth();
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          location.href = "dashboard.html";
+        }
+      });
+
+      const form = document.querySelector(".login-page");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        auth
+          .signInWithEmailAndPassword(form.email.value, form.password.value)
+          .catch(console.log);
+      });
+      const Providers = {
+        google: "GoogleAuthProvider",
+        github: "GithubAuthProvider",
+        fb: "FacebookAuthProvider",
+      };
+      function oAuth2Login(src) {
+        const provider = new firebase.auth[Providers[src]]();
+        auth.signInWithPopup(provider).catch(console.log);
+      }
+    </script>
   </body>
 </html>

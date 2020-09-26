@@ -97,6 +97,7 @@ header {
 .brief {
   color: var(--link-color);
   font-size: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 .contact-btn {
   margin-bottom: 2rem;
@@ -169,11 +170,11 @@ header {
   display: flex;
   justify-content: center;
   margin: 2rem;
-  font-size: 1.9rem;
 }
 .each-li a {
   color: var(--secondary-color);
   margin: 1.5rem;
+  font-size: 1.8rem;
 }
 .each-li a:hover {
   color: var(--link-color);
@@ -304,8 +305,8 @@ textarea:hover {
   background-color: var(--secondary-color);
   color: var(--link-color);
   padding: 0.7rem 2rem;
-  max-width: 50%;
-  margin: auto;
+  /* max-width: 50%; */
+  /* margin: auto; */
   border: none;
   border-radius: 5px;
   font-size: 1.2rem;
@@ -332,8 +333,218 @@ footer ul {
   margin: 0;
 }
 
+/* ===== Login page ===== */
+.login {
+  background: var(--secondary-color);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.login-page {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  padding: 1.5rem;
+  margin: auto;
+  border-radius: 6px;
+  box-shadow: 0 0 25px rgb(54, 46, 65);
+  border-bottom: 5px var(--link-color) solid;
+  border-top: 5px rgb(165, 167, 168) solid;
+  background: transparent;
+}
+.login-page input {
+  background: var(--main-color);
+}
+.login-page input:hover {
+  border: none;
+  /* border-bottom: 2px black solid; */
+  background: white;
+}
+.loginbtn {
+  color: var(--link-color);
+  border: 1px solid var(--link-color);
+  background: var(--secondary-color);
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  /* font-weight: bold; */
+}
+.title-login {
+  color: var(--link-color);
+  margin-bottom: 2rem;
+}
+.loginbtn:hover {
+  background: var(--link-color);
+  color: var(--secondary-color);
+}
+.social-login {
+  margin: 2rem;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.login-page a {
+  font-size: 1.6rem;
+  margin: 2rem;
+}
+.login-page a:hover {
+  color: var(--link-color);
+}
+
+/* =====dashboard nav */
+.avatar {
+  border-radius: 200px;
+  width: 40px;
+  height: 40px;
+  margin-left: 2.5rem;
+  /* border: 2px var(--link-color) solid; */
+}
+a.active {
+  color: var(--link-color);
+}
+
+/* ===queries */
+.queries-h2 {
+  margin-top: 6rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.queries-container {
+  margin: 1rem auto;
+  max-width: 700px;
+}
+.single-query {
+  border-radius: 5px;
+  box-shadow: 0 0 3px black;
+  padding: 0.5rem 1rem;
+  margin: 0 1rem;
+  margin-bottom: 1.2rem;
+}
+.disp-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.7rem 0;
+}
+.commenter-name {
+  text-transform: capitalize;
+  font-size: 1.5rem;
+}
+.delete-query {
+  font-size: 1.5rem;
+  color: var(--secondary-color);
+}
+.delete-query:hover {
+  color: var(--link-color);
+}
+.sender-email {
+  color: var(--secondary-color);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+/* == form validation */
+.success {
+  text-align: center;
+  padding: 1rem;
+  color: rgb(18, 194, 18);
+}
+.invalidMsg {
+  text-align: center;
+  padding: 1rem;
+  color: rgb(248, 15, 15);
+}
+/* == new post and edit */
+.uploader {
+  max-width: 50%;
+  margin-bottom: 1rem;
+}
+.create-blog-post {
+  max-width: 700px;
+  background-color: rgb(223, 228, 223);
+}
+.create-btn {
+  margin-top: 1.5rem;
+}
+.imgPreview {
+  max-width: 500px;
+  max-height: 600px;
+  margin: auto;
+}
+.preview {
+  max-width: 100%;
+  max-height: 100%;
+}
+/* ===dashobard contents */
+.overview-wrapper {
+  background: var(--secondary-color);
+}
+.over-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-gap: 1rem;
+  padding: 6rem 1.5rem 1rem 1.5rem;
+  max-width: 800px;
+  margin: auto;
+}
+.card-over-view {
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 0.6rem;
+  border-radius: 2px;
+  box-shadow: 0 0 18px rgb(65, 64, 64);
+}
+.posts {
+  color: rgb(96, 2, 105);
+}
+.comments {
+  color: rgb(101, 7, 129);
+}
+.likes {
+  color: rgb(63, 81, 243);
+}
+.subs {
+  color: rgb(209, 8, 236);
+}
+.views {
+  color: rgb(117, 79, 167);
+}
+.queries {
+  color: rgb(8, 171, 236);
+}
+.bottom-icons {
+  display: flex;
+  justify-content: space-around;
+}
+.right {
+  font-size: 0.9rem;
+  margin-left: 0.4rem;
+}
+.posts-tags {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+.business {
+  color: #0400ff;
+  margin: 0.4rem;
+}
+.tech {
+  color: #e100ff;
+  margin: 0.4rem;
+}
+
 /* media queries */
+
 @media screen and (max-width: 600px) {
+  .avatar {
+    margin-left: 0;
+  }
   .links {
     flex-direction: column;
   }
@@ -414,5 +625,9 @@ footer ul {
   form {
     margin: 0.7rem;
     top: 9%;
+  }
+  /* login */
+  .login-page a {
+    margin: 1.8rem;
   }
 }
