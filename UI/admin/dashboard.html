@@ -17,12 +17,15 @@
         <ul class="nav-links">
           <li class="nav-link"><a href="" class="active">Dashboard</a></li>
           <li class="nav-link"><a href="./newPost.html">New Post</a></li>
-          <li class="nav-link"><a href="" class="logout">logout</a></li>
           <li class="nav-link"><a href="./queries.html">Queries</a></li>
-          <li class="nav-link">
-            <a href="/UI//admin/login.html"
-              ><img src="/UI/images/my-pic.png" class="avatar" alt="profile" />
+          <li class="nav-link profile-wrapper">
+            <a href="#">
+              <img src="/UI/images/my-pic.png" class="avatar" alt="profile" />
             </a>
+            <div class="dd-menu">
+              <p class="dd-link">Profile</p>
+              <p class="dd-link"><a href="" class="logout">Logout</a></p>
+            </div>
           </li>
         </ul>
       </div>
@@ -32,34 +35,36 @@
         <div class="line"></div>
       </div>
     </nav>
+
     <section class="overview-wrapper">
       <div class="over-view">
         <div class="card-over-view">
-          <p class="overview-item posts">Posts</p>
+          <p class="overview-item posts">Posts:</p>
           <p class="right-nbr">19</p>
         </div>
         <div class="card-over-view">
-          <p class="overview-item comments">Posts</p>
+          <p class="overview-item comments">Comments:</p>
           <p class="right-nbr">19</p>
         </div>
         <div class="card-over-view">
-          <p class="overview-item subs">Posts</p>
+          <p class="overview-item subs">Subscribers:</p>
           <p class="right-nbr">19</p>
         </div>
         <div class="card-over-view">
-          <p class="overview-item likes">Posts</p>
+          <p class="overview-item likes">Likes:</p>
           <p class="right-nbr">19</p>
         </div>
         <div class="card-over-view">
-          <p class="overview-item queries">Posts</p>
+          <p class="overview-item queries">Queries:</p>
           <p class="right-nbr">19</p>
         </div>
         <div class="card-over-view">
-          <p class="overview-item views">Posts</p>
+          <p class="overview-item views">Views:</p>
           <p class="right-nbr">19</p>
         </div>
       </div>
     </section>
+
     <section class="blog-posts-container">
       <div class="each-post">
         <div class="post-img">
@@ -78,6 +83,7 @@
         <h3 class="post-title">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
         </h3>
+        <p class="time"><em> 2 days ago</em></p>
 
         <div class="bottom-icons">
           <p class="each-icon">
@@ -93,12 +99,15 @@
             <span class="right">23</span>
           </p>
         </div>
-        <div class="post-options"></div>
+        <div class="post-options">
+          <button class="edit">Edit</button>
+          <button class="delete">Delete</button>
+        </div>
       </div>
     </section>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script> -->
     <script src="../js/firebase.js"></script>
     <script src="../js/app.js"></script>
 
