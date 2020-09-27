@@ -23,7 +23,7 @@
               <img src="/UI/images/my-pic.png" class="avatar" alt="profile" />
             </a>
             <div class="dd-menu">
-              <p class="dd-link">Profile</p>
+              <p class="dd-link"><a href="./editProfile.html">Profile</a></p>
               <p class="dd-link"><a href="" class="logout">Logout</a></p>
             </div>
           </li>
@@ -114,6 +114,22 @@
             postForm.body.value = "";
           })
           .catch(console.log);
+      });
+
+      // logout functionality
+
+      const auth = firebase.auth();
+      const logout = document.querySelector(".logout");
+
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+        } else {
+          location.href = "login.html";
+        }
+      });
+      logout.addEventListener("click", (e) => {
+        e.preventDefault();
+        auth.signOut().catch(console.log);
       });
     </script>
   </body>
