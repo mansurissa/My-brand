@@ -486,7 +486,7 @@ a.active {
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   grid-gap: 1rem;
   padding: 6rem 1.5rem 1rem 1.5rem;
-  max-width: 800px;
+  max-width: 900px;
   margin: auto;
 }
 .card-over-view {
