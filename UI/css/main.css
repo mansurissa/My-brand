@@ -4,7 +4,7 @@
 }
 :root {
   --main-color: #c4c4c4;
-  --secondary-color: #383f58;
+  --secondary-color: rgb(24, 10, 61);
   --link-color: #00b0ff;
   --special: rgb(78, 78, 78);
 }
@@ -101,7 +101,7 @@ header {
 }
 .contact-btn {
   margin-bottom: 2rem;
-  margin-top: 2.8rem;
+  margin-top: 0.8rem;
   padding: 0.8rem 1.5rem;
   font-size: 1.5rem;
   border: none;
@@ -237,7 +237,7 @@ a {
 .each-post {
   padding: 1rem;
   border-radius: 5px;
-  box-shadow: 1px 1px 20px black;
+  box-shadow: 1px 1px 5px black;
 }
 .each-post:hover {
   border: 1px solid var(--secondary-color);
@@ -348,7 +348,7 @@ footer ul {
   padding: 1.5rem;
   margin: auto;
   border-radius: 6px;
-  box-shadow: 0 0 25px rgb(54, 46, 65);
+  box-shadow: 0 0 10px rgb(69, 12, 150);
   border-bottom: 5px var(--link-color) solid;
   border-top: 5px rgb(165, 167, 168) solid;
   background: transparent;
@@ -483,7 +483,7 @@ a.active {
 }
 .over-view {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   grid-gap: 1rem;
   padding: 6rem 1.5rem 1rem 1.5rem;
   max-width: 800px;
@@ -496,7 +496,7 @@ a.active {
   background-color: white;
   padding: 0.6rem;
   border-radius: 2px;
-  box-shadow: 0 0 18px rgb(65, 64, 64);
+  box-shadow: 0 0 5px rgb(151, 151, 151);
 }
 .posts {
   color: rgb(96, 2, 105);
@@ -538,7 +538,46 @@ a.active {
   color: #e100ff;
   margin: 0.4rem;
 }
+.dd-menu {
+  color: var(--main-color);
+  text-align: center;
+  background: rgb(24, 10, 61);
+  border-radius: 4px;
+  box-shadow: 0 0 5px var(--main-color);
+  padding: 1rem;
+  display: none;
+  position: absolute;
+}
 
+.dd-link {
+  cursor: pointer;
+  margin: 1rem;
+}
+.dd-link:hover {
+  color: var(--link-color);
+}
+.profile-wrapper:hover .dd-menu {
+  display: block;
+}
+.post-options {
+  border-top: 1px solid gray;
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+.time {
+  font-size: 0.7rem;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+.edit,
+.delete {
+  background: var(--secondary-color);
+  padding: 0.4rem 1rem;
+  color: white;
+  border: none;
+  border-radius: 2px;
+}
 /* media queries */
 
 @media screen and (max-width: 600px) {
@@ -630,4 +669,5 @@ a.active {
   .login-page a {
     margin: 1.8rem;
   }
+  /* drop down menu */
 }
