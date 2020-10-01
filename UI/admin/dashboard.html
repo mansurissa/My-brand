@@ -66,7 +66,7 @@
     </section>
 
     <section class="blog-posts-container">
-      <div class="each-post">
+      <!-- <div class="each-post">
         <div class="post-img">
           <img src="../images/placeholder.png" alt="blog" />
         </div>
@@ -103,16 +103,20 @@
           <button class="edit">Edit</button>
           <button class="delete">Delete</button>
         </div>
-      </div>
+      </div> -->
     </section>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="../js/firebase.js"></script>
     <script src="../js/app.js"></script>
 
     <script>
       const auth = firebase.auth();
+      const db = firebase.firestore();
       const logout = document.querySelector(".logout");
+      const postsContainer = document.querySelector(".blog-posts-container");
 
       auth.onAuthStateChanged((user) => {
         if (user) {
@@ -123,6 +127,67 @@
       logout.addEventListener("click", (e) => {
         e.preventDefault();
         auth.signOut().catch(console.log);
+      });
+
+      function deletePost(id) {
+        const confirmation = confirm("Are you sure deleting this post?");
+        confirmation &&
+          db
+            .collection("Posts")
+            .doc(id)
+            .delete()
+            .then(() => console.log("deleted post successfully"))
+            .catch(console.log);
+      }
+
+      db.collection("Posts").onSnapshot((results) => {
+        let html = "";
+        results.forEach((doc) => {
+          const blog = doc.data();
+          html += `<div class="each-post">
+        <div class="post-img">
+          <img src="${blog.image}" />
+        </div>
+        <div class="posts-tags">
+          <p class="tech">
+            <i class="fa fa-tags" aria-hidden="true"></i
+            ><span class="tech">Tech</span>
+          </p>
+          <p class="business">
+            <i class="fa fa-tags" aria-hidden="true"></i
+            ><span class="business">Business</span>
+          </p>
+        </div>
+        <a href="../blog/readblog.html?id=${doc.id}")><h3 class="post-title">
+        ${blog.title}
+        </h3></a>
+        <p class="time"><em> ${moment(blog.time).fromNow()}</em></p>
+
+        <div class="bottom-icons">
+          <p class="each-icon">
+            <i class="fa fa-commenting-o" aria-hidden="true"></i
+            ><span class="right">${blog.commentsCount}</span>
+          </p>
+          <p class="each-icon">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            <span class="right">${blog.views}</span>
+          </p>
+          <p class="each-icon">
+            <i class="fa fa-heart" aria-hidden="true"></i>
+            <span class="right">${blog.likes}</span>
+          </p>
+        </div>
+        <div class="post-options">
+         <a href="./editPost.html?id=${
+           doc.id
+         }"> <button class="edit">Edit</button></a>
+          <button class="delete" onclick="deletePost('${
+            doc.id
+          }')">Delete</button>
+        </div>
+      </div>`;
+        });
+        postsContainer.innerHTML = html;
       });
     </script>
   </body>

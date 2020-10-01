@@ -105,7 +105,7 @@
         db.collection("Queries")
           .doc(id)
           .delete()
-          .then(function () {
+          .then(() => {
             console.log("Document successfully deleted!");
           })
           .catch(console.log);

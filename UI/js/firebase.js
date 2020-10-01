@@ -1,4 +1,4 @@
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyCnjTqbxzRkLhBrLWHRTcFVlRVySgfBqmo",
   authDomain: "issa-brand.firebaseapp.com",
   databaseURL: "https://issa-brand.firebaseio.com",
@@ -10,3 +10,4 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+const increment = firebase.firestore.FieldValue.increment(1);

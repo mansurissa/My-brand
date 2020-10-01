@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="../css/main.css" />
+    <title>Edit Post</title>
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="links">
+        <h1 class="title">My Brand</h1>
+        <ul class="nav-links">
+          <li class="nav-link"><a href="./dashboard.html">Dashboard</a></li>
+          <li class="nav-link"><a href="">New Post</a></li>
+          <li class="nav-link"><a href="./queries.html">Queries</a></li>
+          <li class="nav-link profile-wrapper">
+            <a href="#">
+              <img src="/UI/images/my-pic.png" class="avatar" alt="profile" />
+            </a>
+            <div class="dd-menu">
+              <p class="dd-link"><a href="./editProfile.html">Profile</a></p>
+              <p class="dd-link"><a href="" class="logout">Logout</a></p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="burger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </nav>
+    <section class="create-post">
+      <form class="create-blog-post">
+        <h3 class="post-title">Edit title of Post</h3>
+        <input type="text" name="title" placeholder="Please enter post title" />
+        <h3 class="post-title">Edit image</h3>
+        <input type="file" class="fileBtn" />
+        <div class="imgPreview">
+          <img class="preview" alt="" src="" />
+        </div>
+        <progress value="0" class="uploader"></progress>
+        <textarea name="body" placeholder="Body of your Post"></textarea>
+        <div class="edit-options">
+          <button class="submit create-btn cancel" type="button ">Back</button>
+          <button class="submit create-btn" type="submit ">Save</button>
+        </div>
+      </form>
+    </section>
+
+    <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+
+    <script src="../js/firebase.js"></script>
+    <script src="../js/app.js"></script>
+
+    <script>
+      const postId = location.href.split("?id=")[1];
+      fetchPost(postId);
+
+      const auth = firebase.auth();
+      const logout = document.querySelector(".logout");
+
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+        } else {
+          location.href = "login.html";
+        }
+      });
+      logout.addEventListener("click", (e) => {
+        e.preventDefault();
+        auth.signOut().catch(console.log);
+      });
+
+      CKEDITOR.replace("body");
+      let imageFile = null;
+      const db = firebase.firestore();
+      const uploader = document.querySelector(".uploader");
+      const fileBtn = document.querySelector(".fileBtn");
+      const postForm = document.querySelector(".create-blog-post");
+      const ckBody = document.querySelector(".cke_editable");
+      const preview = document.querySelector(".preview");
+      const cancelBtn = document.querySelector(".cancel");
+
+      cancelBtn.addEventListener("click", () => {
+        location.href = "dashboard.html";
+      });
+
+      fileBtn.addEventListener("change", () => {
+        const file = fileBtn.files[0];
+        if (file) {
+          imageFile = file;
+          const reader = new FileReader();
+          reader.addEventListener("load", () => {
+            preview.setAttribute("src", reader.result);
+          });
+          reader.readAsDataURL(file);
+        }
+      });
+
+      postForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const postImage = imageFile;
+        const storageRef = firebase
+          .storage()
+          .ref(`postsImages/${postImage.name}`);
+        const uploadTask = storageRef.put(postImage);
+        uploadTask.on(
+          "state_changed",
+          function progress(snapshot) {
+            const percentage =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            uploader.value = percentage;
+          },
+          (err) => console.log(),
+          () => {
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+              db.collection("Posts")
+                .doc(postId)
+                .update({
+                  title: postForm.title.value,
+                  image: downloadURL,
+                  body: CKEDITOR.instances.body.getData(),
+                  lastEdit: Date.now(),
+                })
+
+                .then(() => {
+                  postForm.reset();
+                  preview.innerHTML = "";
+                  location.href = "dashboard.html";
+                })
+                .catch(console.log);
+            });
+          }
+        );
+      });
+
+      function fetchPost(id) {
+        firebase
+          .firestore()
+          .collection("Posts")
+          .doc(id)
+          .get()
+          .then((doc) => {
+            const blog = doc.data();
+            postForm.title.value = blog.title;
+            postForm.body.innerHTML = blog.body;
+            preview.src = blog.image;
+          })
+          .catch(console.log);
+      }
+    </script>
+  </body>
+</html>
