@@ -41,7 +41,9 @@
         <input type="text" name="title" placeholder="Please enter post title" />
         <h3 class="post-title">Post image</h3>
         <input type="file" class="fileBtn" />
-        <div class="imgPreview"></div>
+        <div class="imgPreview">
+          <img class="preview" alt="" src="" />
+        </div>
         <progress value="0" class="uploader">0%</progress>
         <textarea name="body" placeholder="Body of your Post"></textarea>
         <button class="submit create-btn" type="submit ">Create</button>
@@ -50,6 +52,7 @@
 
     <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
 
@@ -57,67 +60,6 @@
     <script src="../js/app.js"></script>
 
     <script>
-      CKEDITOR.replace("body");
-      const db = firebase.firestore();
-      const uploader = document.querySelector(".uploader");
-      const fileBtn = document.querySelector(".fileBtn");
-      const postForm = document.querySelector(".create-blog-post");
-      // console.log(postForm.title, postForm.body);
-
-      postForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        let imageURl = "";
-        c;
-        fileBtn.addEventListener("change", (e) => {
-          console.log("canged");
-          const postImage = e.target.files[0];
-          // console.log("post image: ", postImage);
-          const storageRef = firebase
-            .storage()
-            .ref(`postsImages/${postImage.name}`);
-          const uploadTask = storageRef.put(postImage);
-          uploadTask.on(
-            "state_changed",
-            function progress(snapshot) {
-              // console.log(snapshot.bytesTransferred);
-              const percentage =
-                (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              uploader.value = percentage;
-              // console.log(("percentage", percentage));
-            },
-            function error(err) {},
-            function complete() {
-              uploadTask.snapshot.ref
-                .getDownloadURL()
-                .then(function (downloadURL) {
-                  imageURl = downloadURL;
-                });
-            }
-          );
-        });
-
-        db.collection("Posts")
-          .doc()
-          .set({
-            title: postForm.title.value,
-            image: imageURl,
-            body: postForm.body.value,
-            likes: 0,
-            views: 0,
-            comments: 0,
-            time: Date.now(),
-          })
-
-          .then(() => {
-            postForm.name.value = "";
-            postForm.body.value = "";
-          })
-          .catch(console.log);
-      });
-
-      // logout functionality
-
       const auth = firebase.auth();
       const logout = document.querySelector(".logout");
 
@@ -130,6 +72,67 @@
       logout.addEventListener("click", (e) => {
         e.preventDefault();
         auth.signOut().catch(console.log);
+      });
+
+      CKEDITOR.replace("body");
+      let imageFile = null;
+      const db = firebase.firestore();
+      const uploader = document.querySelector(".uploader");
+      const fileBtn = document.querySelector(".fileBtn");
+      const postForm = document.querySelector(".create-blog-post");
+      const ckBody = document.querySelector(".cke_editable");
+      const preview = document.querySelector(".preview");
+
+      fileBtn.addEventListener("change", () => {
+        const file = fileBtn.files[0];
+        if (file) {
+          imageFile = file;
+          const reader = new FileReader();
+          reader.addEventListener("load", () => {
+            preview.setAttribute("src", reader.result);
+          });
+          reader.readAsDataURL(file);
+        }
+      });
+
+      postForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const postImage = imageFile;
+        const storageRef = firebase
+          .storage()
+          .ref(`postsImages/${postImage.name}`);
+        const uploadTask = storageRef.put(postImage);
+        uploadTask.on(
+          "state_changed",
+          function progress(snapshot) {
+            const percentage =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            uploader.value = percentage;
+          },
+          (err) => console.log(),
+          () => {
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+              db.collection("Posts")
+                .add({
+                  title: postForm.title.value,
+                  image: downloadURL,
+                  body: CKEDITOR.instances.body.getData(),
+                  likes: 0,
+                  views: 0,
+                  commentsCount: 0,
+                  time: Date.now(),
+                })
+
+                .then(() => {
+                  postForm.reset();
+                  preview.innerHTML = "";
+                  location.href = "dashboard.html";
+                })
+                .catch(console.log);
+            });
+          }
+        );
       });
     </script>
   </body>
