@@ -11,3 +11,10 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const increment = firebase.firestore.FieldValue.increment(1);
+
+// const logout = document.querySelector(".logout");
+
+// logout.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   auth.signOut().catch(console.log);
+// });

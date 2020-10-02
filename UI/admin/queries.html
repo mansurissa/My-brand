@@ -35,9 +35,14 @@
         <div class="line"></div>
       </div>
     </nav>
-
+    <div class="loader-container">
+      <div id="preloader">
+        <div id="loader"></div>
+      </div>
+    </div>
     <h2 class="title-main queries-h2">This is what you got from vistors</h2>
     <hr />
+
     <section class="queries-container">
       <!-- <div class="single-query">
         <div class="disp-flex">
@@ -99,6 +104,7 @@
       </div>`;
         });
         queries.innerHTML = html;
+        disableLoader();
       });
 
       function deleteQuery(id) {

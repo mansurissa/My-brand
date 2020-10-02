@@ -32,6 +32,11 @@
         <div class="line"></div>
       </div>
     </nav>
+    <div class="loader-container">
+      <div id="preloader">
+        <div id="loader"></div>
+      </div>
+    </div>
     <div class="call-to-subscribe">
       <p class="sub-text">
         Get notified on a new post. <span>No spam, ever</span>
@@ -223,6 +228,7 @@
           </div>
         </div>`;
         });
+        disableLoader();
         postsContainer.innerHTML = html;
       });
 

@@ -35,6 +35,13 @@
         <div class="line"></div>
       </div>
     </nav>
+    <!-- loader -->
+    <div class="loader-container">
+      <div id="preloader">
+        <div id="loader"></div>
+      </div>
+    </div>
+    <!-- loader ends here -->
 
     <section class="overview-wrapper">
       <div class="over-view">
@@ -188,6 +195,7 @@
       </div>`;
         });
         postsContainer.innerHTML = html;
+        disableLoader();
       });
     </script>
   </body>
