@@ -1,4 +1,4 @@
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyCnjTqbxzRkLhBrLWHRTcFVlRVySgfBqmo",
   authDomain: "issa-brand.firebaseapp.com",
   databaseURL: "https://issa-brand.firebaseio.com",
@@ -10,3 +10,11 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+const increment = firebase.firestore.FieldValue.increment(1);
+
+// const logout = document.querySelector(".logout");
+
+// logout.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   auth.signOut().catch(console.log);
+// });

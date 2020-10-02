@@ -23,7 +23,7 @@
               <img src="/UI/images/my-pic.png" class="avatar" alt="profile" />
             </a>
             <div class="dd-menu">
-              <p class="dd-link">Profile</p>
+              <p class="dd-link"><a href="./editProfile.html">Profile</a></p>
               <p class="dd-link"><a href="" class="logout">Logout</a></p>
             </div>
           </li>
@@ -35,9 +35,14 @@
         <div class="line"></div>
       </div>
     </nav>
-
+    <div class="loader-container">
+      <div id="preloader">
+        <div id="loader"></div>
+      </div>
+    </div>
     <h2 class="title-main queries-h2">This is what you got from vistors</h2>
     <hr />
+
     <section class="queries-container">
       <!-- <div class="single-query">
         <div class="disp-flex">
@@ -99,13 +104,14 @@
       </div>`;
         });
         queries.innerHTML = html;
+        disableLoader();
       });
 
       function deleteQuery(id) {
         db.collection("Queries")
           .doc(id)
           .delete()
-          .then(function () {
+          .then(() => {
             console.log("Document successfully deleted!");
           })
           .catch(console.log);

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="../css/main.css" />
+    <title>Super Blog</title>
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="links">
+        <h1 class="title">Super Blog</h1>
+        <ul class="nav-links">
+          <li class="nav-link">
+            <a href="../blog/blogMain.html" class="active">Home</a>
+          </li>
+          <li class="nav-link"><a href="../index.html">Portfolio</a></li>
+          <li class="nav-link"><a href="./about.html">About</a></li>
+          <li class="nav-link">
+            <a href="../admin/login.html"
+              ><span><i class="fa fa-sign-in" aria-hidden="true"></i></span>
+              Login</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="burger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </nav>
+    <div class="call-to-subscribe">
+      <p class="sub-text">
+        Get notified on a new post. <span>No spam, ever</span>
+      </p>
+      <div class="subscribe">
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter Your Email.."
+          class="email-input"
+        />
+        <button class="sub-btn" type="button">Subscribe</button>
+      </div>
+    </div>
+
+    <section class="page-container">
+      <div class="right-posts-container">
+        <div class="post-read">
+          <!-- <h2 class="title onRead-title">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus
+            omnis veniam.
+          </h2>
+          <img src="../images/placeholder.png" alt="" />
+
+          <div class="onRead-post">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod Imperdiet proin fermentum leo vel orci porta non pulvinar.
+              Nam at lectus urna duis convallis convallis tellus. Quisque
+              sagittis purus sit amet volutpat. Ac felis donec et odio
+              pellentesque diam volutpat commodo sed. Ut aliquam purus sit amet
+              luctus venenatis lectus magna fringilla. In ante metus dictum at
+              tempor commodo ullamcorper a lacus. Ullamcorper a lacus vestibulum
+              sed. Tellus at urna condimentum mattis pellentesque id. Dolor sit
+              amet consectetur
+            </p>
+          </div> -->
+        </div>
+        <p class="like">
+          <i class="fa fa-thumbs-o-up" aria-hidden="true"></i
+          ><span class="right">0</span>
+        </p>
+        <h2 class="title-main comments-title">Please leave a Comment</h2>
+
+        <section class="comments-section">
+          <div class="commentsForm"></div>
+          <textarea
+            type="text"
+            class="comment-input"
+            placeholder="Your Comment here.."
+          ></textarea>
+          <button class="submit" onclick="addComment()">Comment</button>
+        </section>
+
+        <h2 class="title-main comments-title">Comments from vistors</h2>
+        <section class="comments-container">
+          <!-- <div class="each-comment">
+            <div class="comment-details">
+              <p class="author">--<em>red hacker</em>--</p>
+              <p class="comment-time">3 days ago</p>
+            </div>
+            <p class="commentPara">
+              Lorem ipsum dolor sit ame t consectetur adipisicing elit.
+              Similique, eaque voluptates. Placeat recusandae iure maxime.
+              Aliquid aut adipisci, nihil fugit, recusandae necessitatibus
+            </p>
+          </div> -->
+        </section>
+      </div>
+
+      <div class="left-container">
+        <div class="search">
+          <input type="text" placeholder="Search here.." class="search-input" />
+          <button class="search-btn" type="submit">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+        <div class="tags">
+          <h3 class="tag-title resp-none">Popular Posts</h3>
+
+          <div class="popular-posts">
+            <h4 class="pop-title">
+              Lorem ipsum dolor sit amet consectetur, ione hic dolorum dolor
+              delectus esse eveniet amet ipsam
+            </h4>
+            <div class="bottom-icons">
+              <p class="time"><em> 2 days ago</em></p>
+              <p class="tech">
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              </p>
+            </div>
+          </div>
+          <div class="popular-posts">
+            <h4 class="pop-title">
+              Lorem ipsum dolor sit amet consectetur, ione hic dolorum dolor
+              delectus esse eveniet amet ipsam
+            </h4>
+            <div class="bottom-icons">
+              <p class="time"><em> 2 days ago</em></p>
+              <p class="tech">
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              </p>
+            </div>
+          </div>
+          <div class="popular-posts">
+            <h4 class="pop-title">
+              Lorem ipsum dolor sit amet consectetur, ione hic dolorum dolor
+              delectus esse eveniet amet ipsam
+            </h4>
+            <div class="bottom-icons">
+              <p class="time"><em> 2 days ago</em></p>
+              <p class="tech">
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <h2 class="title-footer">Follow Us On</h2>
+      <ul class="socials">
+        <li class="each-li">
+          <a href="https://github.com/mansurissa" target="_blank"
+            ><i class="fa fa-github" aria-hidden="true"></i
+          ></a>
+        </li>
+        <li class="each-li">
+          <a
+            href="https://www.linkedin.com/in/nsabimana-issa-1411ba1b3/"
+            target="#blank"
+            ><i class="fa fa-linkedin" aria-hidden="true"></i
+          ></a>
+        </li>
+        <li class="each-li">
+          <a href="https://twitter.com/Rwesamihigo" target="#blank"
+            ><i class="fa fa-twitter" aria-hidden="true"></i
+          ></a>
+        </li>
+      </ul>
+      <p class="footer-msg">Made with Full Focus by <span>Issa</span></p>
+    </footer>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+
+    <script src="../js/firebase.js"></script>
+    <script src="../js/app.js"></script>
+
+    <script>
+      const db = firebase.firestore();
+      const postRead = document.querySelector(".post-read");
+      const commentsContainer = document.querySelector(".comments-container");
+      const subscribe = document.querySelector(".sub-btn");
+      const subInput = document.querySelector(".email-input");
+      const postId = location.href.split("?id=")[1];
+      db.collection("Posts")
+        .doc(postId)
+        .onSnapshot((doc) => {
+          let html = "";
+          const blog = doc.data();
+          html += `
+          <img src="${blog.image}" alt="" />
+          <h2 class="title onRead-title">
+            ${blog.title}
+          </h2>
+          <div class="onRead-post">
+            <p>
+              ${blog.body}
+            </p>
+          </div>
+          `;
+          document.querySelector(".like .right").textContent = blog.likes;
+          postRead.innerHTML = html;
+        });
+
+      function addComment() {
+        const comment = document.querySelector(".comment-input").value;
+        comment.length > 8 &&
+          db
+            .collection("Posts")
+            .doc(postId)
+            .collection("Comments")
+            .add({
+              comment,
+              author: "Anonymous",
+              time: Date.now(),
+            })
+            .then(() => {
+              comment = "";
+            });
+      }
+      db.collection("Posts")
+        .doc(postId)
+        .collection("Comments")
+        .onSnapshot((results) => {
+          let html = "";
+          results.forEach((doc) => {
+            const comment = doc.data();
+            html += ` <div class="each-comment">
+            <div class="comment-details">
+              <p class="author">--<em>${comment.author}</em>--</p>
+              <p class="comment-time"> ${moment(comment.time).fromNow()}</p>
+            </div>
+            <p class="commentPara">
+              ${comment.comment}
+            </p>
+          </div>`;
+          });
+          commentsContainer.innerHTML = html;
+        });
+
+      subscribe.addEventListener("click", () => {
+        console.log("clicked");
+        db.collection("Subscribers")
+          .add({
+            email: subInput.value,
+          })
+          .then(() => {
+            subInput = "";
+          })
+          .catch((err) => console.log(err));
+      });
+      const like = document.querySelector(".like");
+
+      like.addEventListener("click", () => {
+        db.collection("Posts").doc(postId).update({
+          likes: increment,
+        });
+      });
+    </script>
+  </body>
+</html>
