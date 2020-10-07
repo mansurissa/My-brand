@@ -191,6 +191,12 @@
       const subscribe = document.querySelector(".sub-btn");
       const subInput = document.querySelector(".email-input");
       const postId = location.href.split("?id=")[1];
+
+      db.collection("Posts")
+        .doc(postId)
+        .update({ views: increment })
+        .catch(console.log);
+
       db.collection("Posts")
         .doc(postId)
         .onSnapshot((doc) => {
@@ -212,19 +218,23 @@
         });
 
       function addComment() {
-        const comment = document.querySelector(".comment-input").value;
-        comment.length > 8 &&
+        const comment = document.querySelector(".comment-input");
+        comment.value.length > 8 &&
           db
             .collection("Posts")
             .doc(postId)
             .collection("Comments")
             .add({
-              comment,
+              comment: comment.value,
               author: "Anonymous",
               time: Date.now(),
             })
             .then(() => {
-              comment = "";
+              comment.textContent = "";
+              db.collection("Posts")
+                .doc(postId)
+                .update({ commentsCount: increment })
+                .catch(console.log);
             });
       }
       db.collection("Posts")
@@ -248,13 +258,12 @@
         });
 
       subscribe.addEventListener("click", () => {
-        console.log("clicked");
         db.collection("Subscribers")
           .add({
             email: subInput.value,
           })
           .then(() => {
-            subInput = "";
+            subInput.value = "";
           })
           .catch((err) => console.log(err));
       });
