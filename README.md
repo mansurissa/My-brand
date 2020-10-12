@@ -14,8 +14,8 @@ You can vist it [here](https://issa-brand.netlify.app/)
 
 ### Admin Pannel
 
-> On admin side he/she can create, delete and or update post
-> He/she can also view all messages from contact form and able to delete them
+> On admin side he/she can create, delete and or update post,
+> He/she can also view all messages from contact form and able to delete them,
 > He/she can see total(overview) of all posts, views, likes, subscribers, comments on whole blog
 
 ---
