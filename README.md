@@ -42,7 +42,8 @@ I used following technologies to accomplish this:
   - and many other technologies
 
 - **Data base**
-  - mongoDb and mongoose as ORM
+  - mongoDb
+  - mongoose as ORM
 
 ---
 
