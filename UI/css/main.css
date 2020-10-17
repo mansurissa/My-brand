@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Monserrat&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Monserrat&display=swap');
 
 * {
   margin: 0;
   padding: 0;
 }
 :root {
-  --main-color: #eff0ff;
+  --main-color: #f9faff;
   --secondary-color: linear-gradient(
     to right,
     rgb(3, 42, 186),
@@ -30,7 +30,7 @@ html {
   background: var(--secondary-color);
 }
 body {
-  font-family: "Monserrat", sans-serif;
+  font-family: 'Monserrat', sans-serif;
   font-size: 0.9rem;
 }
 
@@ -889,7 +889,7 @@ h4 {
   animation: spin 1s linear infinite;
 }
 #loader:before {
-  content: "";
+  content: '';
   position: absolute;
   top: 5px;
   left: 5px;
@@ -902,7 +902,7 @@ h4 {
   animation: spin 3s linear infinite;
 }
 #loader:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 15px;
   left: 15px;
