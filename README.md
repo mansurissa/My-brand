@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9ff6f7b7-b62b-4c6e-8aaf-379142ac41d3/deploy-status)](https://app.netlify.com/sites/issa-brand/deploys)
+
 ## My-Brand
 
 You can vist it [here](https://issa-brand.netlify.app/)
