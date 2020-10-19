@@ -184,64 +184,140 @@
 
     <script>
       const db = firebase.firestore();
-      const postsContainer = document.querySelector(".right-posts-container");
-      let subInput = document.querySelector(".email-input");
-      const subscribe = document.querySelector(".sub-btn");
-      db.collection("Posts").onSnapshot((results) => {
-        let html = "";
-        results.forEach((doc) => {
-          const blog = doc.data();
-          html += ` <div class="post-card">
-          <div class="left-blog-card">
-            <a href="../blog/readblog.html?id=${doc.id}"><h3 class="post-title">
-        ${blog.title}
-        </h3></a>
-            <div class="posts-tags">
-              <p class="tech">
-                <i class="fa fa-tags" aria-hidden="true"></i
-                ><span class="tech">Tech</span>
-              </p>
-              <p class="business">
-                <i class="fa fa-tags" aria-hidden="true"></i
-                ><span class="business">Business</span>
-              </p>
-            </div>
-            <div class="bottom-icons">
-              <p class="time"><em> ${moment(blog.time).fromNow()}</em></p>
-              <p class="each-icon">
-                <i class="fa fa-commenting-o" aria-hidden="true"></i
-                ><span class="right">${blog.commentsCount}</span>
-              </p>
-              <p class="each-icon">
-                <i class="fa fa-eye" aria-hidden="true"></i>
-                <span class="right">${blog.views}</span>
-              </p>
-              <p class="each-icon">
-                <i class="fa fa-heart" aria-hidden="true"></i>
-                <span class="right">${blog.likes}</span>
-              </p>
-            </div>
-          </div>
+      const postsContainer = document.querySelector('.right-posts-container');
+      let subInput = document.querySelector('.email-input');
+      const subscribe = document.querySelector('.sub-btn');
 
-          <div class="right-blog-card">
-            <img src="${blog.image}" alt="post image" />
-          </div>
-        </div>`;
-        });
-        disableLoader();
-        postsContainer.innerHTML = html;
-      });
+      (async () => {
+        try {
+          const fetchedPosts = await fetch(
+            'https://issa-portfolio-brand.herokuapp.com/blog',
+            {
+              method: 'GET',
+              headers: { 'content-Type': 'application/json' },
+            },
+          );
+          const posts = await fetchedPosts.json();
+          let html = '';
+          await posts.forEach((post) => {
+            console.log(post);
+            html += ` <div class="post-card">
+         <div class="left-blog-card">
+           <a href="../blog/readblog.html?id=${
+             post._id
+           }"><h3 class="post-title">
+         ${post.title}
+         </h3></a>
+           <div class="posts-tags">
+             <p class="tech">
+               <i class="fa fa-tags" aria-hidden="true"></i
+               ><span class="tech">Tech</span>
+             </p>
+             <p class="business">
+               <i class="fa fa-tags" aria-hidden="true"></i
+               ><span class="business">Business</span>
+             </p>
+           </div>
+           <div class="bottom-icons">
+             <p class="time"><em> ${moment(post.time).fromNow()}</em></p>
+             <p class="each-icon">
+               <i class="fa fa-commenting-o" aria-hidden="true"></i
+               ><span class="right">${post.commentsCount}</span>
+             </p>
+             <p class="each-icon">
+               <i class="fa fa-eye" aria-hidden="true"></i>
+               <span class="right">${post.views}</span>
+             </p>
+             <p class="each-icon">
+               <i class="fa fa-heart" aria-hidden="true"></i>
+               <span class="right">${post.likes}</span>
+             </p>
+           </div>
+         </div>
 
-      subscribe.addEventListener("click", () => {
-        console.log("clicked");
-        db.collection("Subscribers")
-          .add({
-            email: subInput.value,
-          })
-          .then(() => {
-            subInput = "";
-          })
-          .catch((err) => console.log(err));
+         <div class="right-blog-card">
+           <img src="${post.image}" alt="post image" />
+         </div>
+       </div>`;
+          });
+          disableLoader();
+          postsContainer.innerHTML = html;
+        } catch (error) {
+          console.log(error);
+        }
+      })();
+
+      // db.collection('Posts').onSnapshot((results) => {
+      //   let html = '';
+      //   results.forEach((doc) => {
+      //     const blog = doc.data();
+      //     html += `
+
+      //      <div class="post-card">
+      //     <div class="left-blog-card">
+      //       <a href="../blog/readblog.html?id=${doc.id}"><h3 class="post-title">
+      //     ${blog.title}
+      //     </h3></a>
+      //       <div class="posts-tags">
+      //         <p class="tech">
+      //           <i class="fa fa-tags" aria-hidden="true"></i
+      //           ><span class="tech">Tech</span>
+      //         </p>
+      //         <p class="business">
+      //           <i class="fa fa-tags" aria-hidden="true"></i
+      //           ><span class="business">Business</span>
+      //         </p>
+      //       </div>
+      //       <div class="bottom-icons">
+      //         <p class="time"><em> ${moment(blog.time).fromNow()}</em></p>
+      //         <p class="each-icon">
+      //           <i class="fa fa-commenting-o" aria-hidden="true"></i
+      //           ><span class="right">${blog.commentsCount}</span>
+      //         </p>
+      //         <p class="each-icon">
+      //           <i class="fa fa-eye" aria-hidden="true"></i>
+      //           <span class="right">${blog.views}</span>
+      //         </p>
+      //         <p class="each-icon">
+      //           <i class="fa fa-heart" aria-hidden="true"></i>
+      //           <span class="right">${blog.likes}</span>
+      //         </p>
+      //       </div>
+      //     </div>
+
+      //     <div class="right-blog-card">
+      //       <img src="${blog.image}" alt="post image" />
+      //     </div>
+      //   </div>`;
+      //   });
+      //   disableLoader();
+      //   postsContainer.innerHTML = html;
+      // });
+
+      subscribe.addEventListener('click', async () => {
+        console.log('clicked');
+        // db.collection("Subscribers")
+        //   .add({
+        //     email: subInput.value,
+        //   })
+        //   .then(() => {
+        //     subInput = "";
+        //   })
+        //   .catch((err) => console.log(err));
+
+        // =========================================
+
+        const subscriber = await fetch(
+          'https://issa-portfolio-brand.herokuapp.com/blog/subscribe',
+          {
+            method: 'post',
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: subInput.value,
+            }),
+          },
+        );
+        console.log(subscriber);
       });
     </script>
   </body>

@@ -337,27 +337,27 @@
 
     <script>
       const db = firebase.firestore();
-      const contactForm = document.querySelector(".contact-form");
+      const contactForm = document.querySelector('.contact-form');
 
-      const invalidMsg = document.querySelector(".invalidMsg");
+      const invalidMsg = document.querySelector('.invalidMsg');
       const validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
       const checkValidation = () => {
         if (!contactForm.email.value.match(validEmail)) {
           invalidMsg.innerHTML = `<i class="fa fa-times-circle" aria-hidden="true"></i> Please Enter a valid email`;
         } else if (contactForm.name.value.length < 3) {
           invalidMsg.innerHTML = `<i class="fa fa-times-circle" aria-hidden="true"></i> Your best name is needed`;
-        } else if (contactForm.message.value == "") {
+        } else if (contactForm.message.value == '') {
           invalidMsg.innerHTML = `<i class="fa fa-times-circle" aria-hidden="true"></i>Oooh your message please..`;
         } else {
           return true;
         }
       };
 
-      contactForm.addEventListener("submit", (e) => {
+      contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         if (checkValidation()) {
-          db.collection("Queries")
+          db.collection('Queries')
             .doc()
             .set({
               name: contactForm.name.value,
@@ -366,17 +366,17 @@
               time: Date.now(),
             })
             .then(() => {
-              contactForm.name.value = "";
-              contactForm.email.value = "";
-              contactForm.message.value = "";
-              invalidMsg.innerHTML = "";
+              contactForm.name.value = '';
+              contactForm.email.value = '';
+              contactForm.message.value = '';
+              invalidMsg.innerHTML = '';
               document.querySelector(
-                ".success"
+                '.success',
               ).innerHTML = `<p class="success"><i class="fa fa-check" aria-hidden="true"></i>Successfully sent! Thanks.</p>`;
             })
             .catch(console.log);
           setTimeout(() => {
-            document.querySelector(".success").style.display = "none";
+            document.querySelector('.success').style.display = 'none';
           }, 5000);
         }
       });
