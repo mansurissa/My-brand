@@ -223,7 +223,12 @@
       <h2 class="title-main" id="blog">BLOG</h2>
       <p class="last-posts">Latest posts from my blog</p>
       <div class="blog-posts-container">
-        <div class="each-post">
+        <div class="loader-container">
+          <div id="preloader">
+            <div id="loader"></div>
+          </div>
+        </div>
+        <!-- <div class="each-post">
           <div class="post-img">
             <img src="./images/placeholder.png" alt="blog" />
           </div>
@@ -278,7 +283,7 @@
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
           </h3>
           <button class="visit blog-btn"><a href="">Read More</a></button>
-        </div>
+        </div> -->
       </div>
       <button class="visit-github visit-blog">
         <a href="./blog/blogMain.html" target="#blank"> Visit Blog </a>
@@ -337,27 +342,45 @@
 
     <script>
       const db = firebase.firestore();
-      const contactForm = document.querySelector(".contact-form");
+      const contactForm = document.querySelector('.contact-form');
 
-      const invalidMsg = document.querySelector(".invalidMsg");
+      const invalidMsg = document.querySelector('.invalidMsg');
       const validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
       const checkValidation = () => {
         if (!contactForm.email.value.match(validEmail)) {
           invalidMsg.innerHTML = `<i class="fa fa-times-circle" aria-hidden="true"></i> Please Enter a valid email`;
         } else if (contactForm.name.value.length < 3) {
           invalidMsg.innerHTML = `<i class="fa fa-times-circle" aria-hidden="true"></i> Your best name is needed`;
-        } else if (contactForm.message.value == "") {
+        } else if (contactForm.message.value == '') {
           invalidMsg.innerHTML = `<i class="fa fa-times-circle" aria-hidden="true"></i>Oooh your message please..`;
         } else {
           return true;
         }
       };
-
-      contactForm.addEventListener("submit", (e) => {
+      fetch('https://issa-portfolio-brand.herokuapp.com/blog')
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          let html = '';
+          res.data.posts.forEach((blog) => {
+            html += `<div class="each-post">
+          <div class="post-img">
+            <img src="${blog.imageUrl}" alt="blog" />
+          </div>
+          <h3 class="post-title">
+          ${blog.title}
+          </h3>
+          <button class="visit blog-btn"><a href="/blog/readblog.html?id=${blog._id}">Read More</a></button>
+        </div>`;
+          });
+          document.querySelector('.blog-posts-container').innerHTML = html;
+        })
+        .catch(console.log);
+      contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         if (checkValidation()) {
-          db.collection("Queries")
+          db.collection('Queries')
             .doc()
             .set({
               name: contactForm.name.value,
@@ -366,17 +389,17 @@
               time: Date.now(),
             })
             .then(() => {
-              contactForm.name.value = "";
-              contactForm.email.value = "";
-              contactForm.message.value = "";
-              invalidMsg.innerHTML = "";
+              contactForm.name.value = '';
+              contactForm.email.value = '';
+              contactForm.message.value = '';
+              invalidMsg.innerHTML = '';
               document.querySelector(
-                ".success"
+                '.success',
               ).innerHTML = `<p class="success"><i class="fa fa-check" aria-hidden="true"></i>Successfully sent! Thanks.</p>`;
             })
             .catch(console.log);
           setTimeout(() => {
-            document.querySelector(".success").style.display = "none";
+            document.querySelector('.success').style.display = 'none';
           }, 5000);
         }
       });

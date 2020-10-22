@@ -56,108 +56,145 @@
     <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script> -->
 
     <script src="../js/firebase.js"></script>
     <script src="../js/app.js"></script>
 
     <script>
-      const postId = location.href.split("?id=")[1];
-      fetchPost(postId);
+      const postId = location.href.split('?id=')[1];
+      // fetchPost(postId);
 
       const auth = firebase.auth();
-      const logout = document.querySelector(".logout");
+      const logout = document.querySelector('.logout');
 
       auth.onAuthStateChanged((user) => {
         if (user) {
         } else {
-          location.href = "login.html";
+          location.href = 'login.html';
         }
       });
-      logout.addEventListener("click", (e) => {
+      logout.addEventListener('click', (e) => {
         e.preventDefault();
         auth.signOut().catch(console.log);
       });
 
-      CKEDITOR.replace("body");
+      CKEDITOR.replace('body');
       let imageFile = null;
-      const db = firebase.firestore();
-      const uploader = document.querySelector(".uploader");
-      const fileBtn = document.querySelector(".fileBtn");
-      const postForm = document.querySelector(".create-blog-post");
-      const ckBody = document.querySelector(".cke_editable");
-      const preview = document.querySelector(".preview");
-      const cancelBtn = document.querySelector(".cancel");
+      // const db = firebase.firestore();
+      const uploader = document.querySelector('.uploader');
+      const fileBtn = document.querySelector('.fileBtn');
+      const postForm = document.querySelector('.create-blog-post');
+      const ckBody = document.querySelector('.cke_editable');
+      const preview = document.querySelector('.preview');
+      const cancelBtn = document.querySelector('.cancel');
 
-      cancelBtn.addEventListener("click", () => {
-        location.href = "dashboard.html";
+      cancelBtn.addEventListener('click', () => {
+        location.href = 'dashboard.html';
       });
 
-      fileBtn.addEventListener("change", () => {
+      fileBtn.addEventListener('change', () => {
         const file = fileBtn.files[0];
         if (file) {
           imageFile = file;
           const reader = new FileReader();
-          reader.addEventListener("load", () => {
-            preview.setAttribute("src", reader.result);
+          reader.addEventListener('load', () => {
+            preview.setAttribute('src', reader.result);
           });
           reader.readAsDataURL(file);
         }
       });
 
-      postForm.addEventListener("submit", (e) => {
+      (async () => {
+        const res = await fetch(
+          `https://issa-portfolio-brand.herokuapp.com/blog/${postId}`,
+        );
+        const fetchedPost = await res.json();
+        const post = fetchedPost.data;
+        postForm.title.value = post.title;
+        postForm.body.value = post.body;
+        preview.src = post.imageUrl;
+      })();
+      // function fetchPost(id) {
+      //   firebase
+      //     .firestore()
+      //     .collection('Posts')
+      //     .doc(id)
+      //     .get()
+      //     .then((doc) => {
+      //       const blog = doc.data();
+      //       postForm.title.value = blog.title;
+      //       postForm.body.innerHTML = blog.body;
+      //       preview.src = blog.image;
+      //     })
+      //     .catch(console.log);
+      // }
+
+      postForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const postImage = imageFile;
-        const storageRef = firebase
-          .storage()
-          .ref(`postsImages/${postImage.name}`);
-        const uploadTask = storageRef.put(postImage);
-        uploadTask.on(
-          "state_changed",
-          function progress(snapshot) {
-            const percentage =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            uploader.value = percentage;
-          },
-          (err) => console.log(),
-          () => {
-            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-              db.collection("Posts")
-                .doc(postId)
-                .update({
-                  title: postForm.title.value,
-                  image: downloadURL,
-                  body: CKEDITOR.instances.body.getData(),
-                  lastEdit: Date.now(),
-                })
+        try {
+          const fd = new FormData();
 
-                .then(() => {
-                  postForm.reset();
-                  preview.innerHTML = "";
-                  location.href = "dashboard.html";
-                })
-                .catch(console.log);
-            });
-          }
-        );
+          fd.append('image', imageFile);
+          fd.append('title', postForm.title.value);
+          fd.append('body', CKEDITOR.instances.body.getData());
+          const res = await fetch(
+            `https://issa-portfolio-brand.herokuapp.com/blog/${postId}`,
+            {
+              method: 'patch',
+              headers: { 'content-Type': 'application/json' },
+              body: fd,
+            },
+          );
+          const post = await res.json();
+          console.log(post);
+
+          postForm.reset();
+          preview.innerHTML = '';
+          location.href = 'dashboard.html';
+        } catch (error) {
+          console.log(error);
+        }
+
+
+
+
+        // const postImage = imageFile;
+        // const storageRef = firebase
+        //   .storage()
+        // .ref(`postsImages/${postImage.name}`);
+        // const uploadTask = storageRef.put(postImage);
+        // uploadTask.on(
+        //   'state_changed',
+        //   function progress(snapshot) {
+        //     const percentage =
+        //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        //     uploader.value = percentage;
+        //   },
+        //   (err) => console.log(),
+        //   () => {
+        //     uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+        //       db.collection('Posts')
+        //         .doc(postId)
+        //         .update({
+        //           title: postForm.title.value,
+        //           image: downloadURL,
+        //           body: CKEDITOR.instances.body.getData(),
+        //           lastEdit: Date.now(),
+        //         })
+
+        //         .then(() => {
+        //           postForm.reset();
+        //           preview.innerHTML = '';
+        //           location.href = 'dashboard.html';
+        //         })
+        //         .catch(console.log);
+        //     });
+        //   },
+        // );
       });
-
-      function fetchPost(id) {
-        firebase
-          .firestore()
-          .collection("Posts")
-          .doc(id)
-          .get()
-          .then((doc) => {
-            const blog = doc.data();
-            postForm.title.value = blog.title;
-            postForm.body.innerHTML = blog.body;
-            preview.src = blog.image;
-          })
-          .catch(console.log);
-      }
     </script>
   </body>
 </html>

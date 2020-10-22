@@ -51,27 +51,7 @@
 
     <section class="page-container">
       <div class="right-posts-container">
-        <div class="post-read">
-          <!-- <h2 class="title onRead-title">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus
-            omnis veniam.
-          </h2>
-          <img src="../images/placeholder.png" alt="" />
-
-          <div class="onRead-post">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod Imperdiet proin fermentum leo vel orci porta non pulvinar.
-              Nam at lectus urna duis convallis convallis tellus. Quisque
-              sagittis purus sit amet volutpat. Ac felis donec et odio
-              pellentesque diam volutpat commodo sed. Ut aliquam purus sit amet
-              luctus venenatis lectus magna fringilla. In ante metus dictum at
-              tempor commodo ullamcorper a lacus. Ullamcorper a lacus vestibulum
-              sed. Tellus at urna condimentum mattis pellentesque id. Dolor sit
-              amet consectetur
-            </p>
-          </div> -->
-        </div>
+        <div class="post-read"></div>
         <p class="like">
           <i class="fa fa-thumbs-o-up" aria-hidden="true"></i
           ><span class="right">0</span>
@@ -89,68 +69,7 @@
         </section>
 
         <h2 class="title-main comments-title">Comments from vistors</h2>
-        <section class="comments-container">
-          <!-- <div class="each-comment">
-            <div class="comment-details">
-              <p class="author">--<em>red hacker</em>--</p>
-              <p class="comment-time">3 days ago</p>
-            </div>
-            <p class="commentPara">
-              Lorem ipsum dolor sit ame t consectetur adipisicing elit.
-              Similique, eaque voluptates. Placeat recusandae iure maxime.
-              Aliquid aut adipisci, nihil fugit, recusandae necessitatibus
-            </p>
-          </div> -->
-        </section>
-      </div>
-
-      <div class="left-container">
-        <div class="search">
-          <input type="text" placeholder="Search here.." class="search-input" />
-          <button class="search-btn" type="submit">
-            <i class="fa fa-search"></i>
-          </button>
-        </div>
-        <div class="tags">
-          <h3 class="tag-title resp-none">Popular Posts</h3>
-
-          <div class="popular-posts">
-            <h4 class="pop-title">
-              Lorem ipsum dolor sit amet consectetur, ione hic dolorum dolor
-              delectus esse eveniet amet ipsam
-            </h4>
-            <div class="bottom-icons">
-              <p class="time"><em> 2 days ago</em></p>
-              <p class="tech">
-                <i class="fa fa-tags" aria-hidden="true"></i>
-              </p>
-            </div>
-          </div>
-          <div class="popular-posts">
-            <h4 class="pop-title">
-              Lorem ipsum dolor sit amet consectetur, ione hic dolorum dolor
-              delectus esse eveniet amet ipsam
-            </h4>
-            <div class="bottom-icons">
-              <p class="time"><em> 2 days ago</em></p>
-              <p class="tech">
-                <i class="fa fa-tags" aria-hidden="true"></i>
-              </p>
-            </div>
-          </div>
-          <div class="popular-posts">
-            <h4 class="pop-title">
-              Lorem ipsum dolor sit amet consectetur, ione hic dolorum dolor
-              delectus esse eveniet amet ipsam
-            </h4>
-            <div class="bottom-icons">
-              <p class="time"><em> 2 days ago</em></p>
-              <p class="tech">
-                <i class="fa fa-tags" aria-hidden="true"></i>
-              </p>
-            </div>
-          </div>
-        </div>
+        <section class="comments-container"></section>
       </div>
     </section>
     <footer>
@@ -178,101 +97,188 @@
     </footer>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
     <script src="../js/firebase.js"></script>
     <script src="../js/app.js"></script>
 
     <script>
-      const db = firebase.firestore();
-      const postRead = document.querySelector(".post-read");
-      const commentsContainer = document.querySelector(".comments-container");
-      const subscribe = document.querySelector(".sub-btn");
-      const subInput = document.querySelector(".email-input");
-      const postId = location.href.split("?id=")[1];
+      // const db = firebase.firestore();
+      const postRead = document.querySelector('.post-read');
+      const commentsContainer = document.querySelector('.comments-container');
+      const subscribe = document.querySelector('.sub-btn');
+      const subInput = document.querySelector('.email-input');
+      const postId = location.href.split('?id=')[1];
 
-      db.collection("Posts")
-        .doc(postId)
-        .update({ views: increment })
-        .catch(console.log);
+      // db.collection('Posts')
+      //   .doc(postId)
+      //   .update({ views: increment })
+      //   .catch(console.log);
 
-      db.collection("Posts")
-        .doc(postId)
-        .onSnapshot((doc) => {
-          let html = "";
-          const blog = doc.data();
-          html += `
-          <img src="${blog.image}" alt="" />
-          <h2 class="title onRead-title">
-            ${blog.title}
-          </h2>
-          <div class="onRead-post">
-            <p>
-              ${blog.body}
-            </p>
-          </div>
-          `;
-          document.querySelector(".like .right").textContent = blog.likes;
-          postRead.innerHTML = html;
-        });
+      (async () => {
+        const res = await fetch(
+          `https://issa-portfolio-brand.herokuapp.com/blog/${postId}`,
+        );
+        const postData = await res.json();
+        const post = postData.data;
+        post.views += 1;
+
+        let html = `
+                <img src="${post.imageUrl}" alt="" class="post-img" />
+                <h2 class="title onRead-title">
+                  ${post.title}
+                </h2>
+                <div class="onRead-post">
+                  <p>
+                    ${post.body}
+                  </p>
+                </div>
+                `;
+        document.querySelector('.like .right').textContent = post.likes;
+        postRead.innerHTML = html;
+      })();
+      // db.collection('Posts')
+      //   .doc(postId)
+      //   .onSnapshot((doc) => {
+      //     let html = '';
+      //     const blog = doc.data();
+      //     html += `
+      //     <img src="${blog.image}" alt="" />
+      //     <h2 class="title onRead-title">
+      //       ${blog.title}
+      //     </h2>
+      //     <div class="onRead-post">
+      //       <p>
+      //         ${blog.body}
+      //       </p>
+      //     </div>
+      //     `;
+      //     document.querySelector('.like .right').textContent = blog.likes;
+      //     postRead.innerHTML = html;
+      //   });
 
       function addComment() {
-        const comment = document.querySelector(".comment-input");
-        comment.value.length > 8 &&
-          db
-            .collection("Posts")
-            .doc(postId)
-            .collection("Comments")
-            .add({
-              comment: comment.value,
-              author: "Anonymous",
-              time: Date.now(),
-            })
-            .then(() => {
-              comment.textContent = "";
-              db.collection("Posts")
-                .doc(postId)
-                .update({ commentsCount: increment })
-                .catch(console.log);
-            });
+        const comment = document.querySelector('.comment-input');
+        comment.value.length > 5 &&
+          (async () => {
+            await fetch(
+              `https://issa-portfolio-brand.herokuapp.com/blog/${postId}/comment`,
+              {
+                method: 'post',
+                headers: { 'content-Type': 'application/json' },
+                body: JSON.stringify({
+                  message: comment.value,
+                  name: 'Anonymous',
+                  time: Date.now(),
+                }),
+              },
+            );
+            await location.reload();
+          })();
+
+        // db.collection('Posts')
+        //   .doc(postId)
+        //   .collection('Comments')
+        //   .add({
+        //     comment: comment.value,
+        //     author: 'Anonymous',
+        //     time: Date.now(),
+        //   })
+        //   .then(() => {
+        //     comment.textContent = '';
+        //     db.collection('Posts')
+        //       .doc(postId)
+        //       .update({ commentsCount: increment })
+        //       .catch(console.log);
+        //   });
       }
-      db.collection("Posts")
-        .doc(postId)
-        .collection("Comments")
-        .onSnapshot((results) => {
-          let html = "";
-          results.forEach((doc) => {
-            const comment = doc.data();
-            html += ` <div class="each-comment">
-            <div class="comment-details">
-              <p class="author">--<em>${comment.author}</em>--</p>
-              <p class="comment-time"> ${moment(comment.time).fromNow()}</p>
-            </div>
-            <p class="commentPara">
-              ${comment.comment}
-            </p>
-          </div>`;
-          });
-          commentsContainer.innerHTML = html;
-        });
 
-      subscribe.addEventListener("click", () => {
-        db.collection("Subscribers")
-          .add({
-            email: subInput.value,
-          })
-          .then(() => {
-            subInput.value = "";
-          })
-          .catch((err) => console.log(err));
+      (async () => {
+        const res = await fetch(
+          `https://issa-portfolio-brand.herokuapp.com/blog/${postId}/allComments`,
+        );
+        const comments = await res.json();
+        let html = '';
+        comments.data.forEach((comment) => {
+          html += ` <div class="each-comment">
+                  <div class="comment-details">
+                    <p class="author">--<em>${comment.name}</em>--</p>
+                    <p class="comment-time"> ${moment(
+                      comment.time,
+                    ).fromNow()}</p>
+                  </div>
+                  <p class="commentPara">
+                    ${comment.message}
+                  </p>
+                </div>`;
+        });
+        commentsContainer.innerHTML = html;
+      })();
+
+      // db.collection('Posts')
+      //   .doc(postId)
+      //   .collection('Comments')
+      //   .onSnapshot((results) => {
+      //     let html = '';
+      //     results.forEach((doc) => {
+      //       const comment = doc.data();
+      //       html += ` <div class="each-comment">
+      //             <div class="comment-details">
+      //               <p class="author">--<em>${comment.author}</em>--</p>
+      //               <p class="comment-time"> ${moment(
+      //                 comment.time,
+      //               ).fromNow()}</p>
+      //             </div>
+      //             <p class="commentPara">
+      //               ${comment.comment}
+      //             </p>
+      //           </div>`;
+      //     });
+      //     commentsContainer.innerHTML = html;
+      //   });
+
+      subscribe.addEventListener('click', async () => {
+        console.log('clicked');
+        // db.collection("Subscribers")
+        //   .add({
+        //     email: subInput.value,
+        //   })
+        //   .then(() => {
+        //     subInput = "";
+        //   })
+        //   .catch((err) => console.log(err));
+
+        // =========================================
+
+        const res = await fetch(
+          'https://issa-portfolio-brand.herokuapp.com/blog/subscribe',
+          {
+            method: 'post',
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: subInput.value,
+            }),
+          },
+        );
+        const subscriber = await res.json();
+        console.log(subscriber);
       });
-      const like = document.querySelector(".like");
 
-      like.addEventListener("click", () => {
-        db.collection("Posts").doc(postId).update({
-          likes: increment,
-        });
+      const like = document.querySelector('.like');
+
+      like.addEventListener('click', async () => {
+        await fetch(
+          `https://issa-portfolio-brand.herokuapp.com/blog/${postId}`,
+          {
+            method: 'put',
+            headers: { 'content-Type': 'application/json' },
+          },
+        );
+
+        // db.collection('Posts').doc(postId).update({
+        //   likes: increment,
+        // });
       });
     </script>
   </body>

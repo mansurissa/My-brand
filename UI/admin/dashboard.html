@@ -129,105 +129,183 @@
 
       const auth = firebase.auth();
       const db = firebase.firestore();
-      const logout = document.querySelector(".logout");
-      const postsContainer = document.querySelector(".blog-posts-container");
+      const logout = document.querySelector('.logout');
+      const postsContainer = document.querySelector('.blog-posts-container');
 
       auth.onAuthStateChanged((user) => {
         if (user) {
         } else {
-          location.href = "login.html";
+          location.href = 'login.html';
         }
       });
-      logout.addEventListener("click", (e) => {
+      logout.addEventListener('click', (e) => {
         e.preventDefault();
         auth.signOut().catch(console.log);
       });
 
       function deletePost(id) {
-        const confirmation = confirm("Are you sure deleting this post?");
+        const confirmation = confirm('Are you sure deleting this post?');
         confirmation &&
-          db
-            .collection("Posts")
-            .doc(id)
-            .delete()
-            .then(() => console.log("deleted post successfully"))
-            .catch(console.log);
+          (async () => {
+            await fetch(
+              `https://issa-portfolio-brand.herokuapp.com/blog/${id}`,
+              {
+                method: 'delete',
+                headers: { 'content-Type': 'application/json' },
+              },
+            );
+            console.log('deleted successfully');
+            location.reload();
+          })();
+        // db
+        //   .collection('Posts')
+        //   .doc(id)
+        //   .delete()
+        //   .then(() => console.log('deleted post successfully'))
+        //   .catch(console.log);
       }
 
-      db.collection("Posts").onSnapshot((results) => {
-        let html = "";
-        results.forEach((doc) => {
+      // db.collection("Posts").onSnapshot((results) => {
+      //   let html = "";
+      (async () => {
+        const res = await fetch(
+          'https://issa-portfolio-brand.herokuapp.com/blog',
+        );
+        let html = '';
+        const data = await res.json();
+        data.data.posts.forEach((post) => {
           totalPosts++;
-          const blog = doc.data();
-          totalViews += blog.views;
-          totalComments += blog.commentsCount;
-          totalLikes += blog.likes;
+
+          totalViews += post.views;
+          totalComments += post.commentsCount;
+          totalLikes += post.likes;
 
           html += `<div class="each-post">
         <div class="post-img">
-          <img src="${blog.image}" />
+          <img src="${post.imageUrl}" />
         </div>
-        <div class="posts-tags">
-          <p class="tech">
-            <i class="fa fa-tags" aria-hidden="true"></i
-            ><span class="tech">Tech</span>
-          </p>
-          <p class="business">
-            <i class="fa fa-tags" aria-hidden="true"></i
-            ><span class="business">Business</span>
-          </p>
-        </div>
-        <a href="../blog/readblog.html?id=${doc.id}")><h3 class="post-title">
-        ${blog.title}
+       
+        <a href="../blog/readblog.html?id=${post._id}")><h3 class="post-title">
+        ${post.title}
         </h3></a>
-        <p class="time"><em> ${moment(blog.time).fromNow()}</em></p>
+        <p class="time"><em> ${moment(post.time).fromNow()}</em></p>
 
         <div class="bottom-icons">
           <p class="each-icon">
             <i class="fa fa-commenting-o" aria-hidden="true"></i
-            ><span class="right">${blog.commentsCount}</span>
+            ><span class="right">${post.commentsCount}</span>
           </p>
           <p class="each-icon">
             <i class="fa fa-eye" aria-hidden="true"></i>
-            <span class="right">${blog.views}</span>
+            <span class="right">${post.views}</span>
           </p>
           <p class="each-icon">
             <i class="fa fa-heart" aria-hidden="true"></i>
-            <span class="right">${blog.likes}</span>
+            <span class="right">${post.likes}</span>
           </p>
         </div>
         <div class="post-options">
          <a href="./editPost.html?id=${
-           doc.id
+           post._id
          }"> <button class="edit">Edit</button></a>
           <button class="delete" onclick="deletePost('${
-            doc.id
+            post._id
           }')">Delete</button>
         </div>
       </div>`;
         });
         postsContainer.innerHTML = html;
-        document.querySelector("#views").textContent = totalViews;
-        document.querySelector("#likes").textContent = totalLikes;
-        document.querySelector("#comments").textContent = totalComments;
-        document.querySelector("#posts").textContent = totalPosts;
+        document.querySelector('#views').textContent = totalViews;
+        document.querySelector('#likes').textContent = totalLikes;
+        document.querySelector('#comments').textContent = totalComments;
+        document.querySelector('#posts').textContent = totalPosts;
 
         disableLoader();
-      });
+      })();
 
-      db.collection("Queries").onSnapshot((queries) => {
+      // results.forEach((doc) => {
+      //   totalPosts++;
+      //   const blog = doc.data();
+      //   totalViews += blog.views;
+      //   totalComments += blog.commentsCount;
+      //   totalLikes += blog.likes;
+
+      //   html += `<div class="each-post">
+      //   <div class="post-img">
+      //     <img src="${blog.image}" />
+      //   </div>
+      //   <div class="posts-tags">
+      //     <p class="tech">
+      //       <i class="fa fa-tags" aria-hidden="true"></i
+      //       ><span class="tech">Tech</span>
+      //     </p>
+      //     <p class="business">
+      //       <i class="fa fa-tags" aria-hidden="true"></i
+      //       ><span class="business">Business</span>
+      //     </p>
+      //   </div>
+      //   <a href="../blog/readblog.html?id=${doc.id}")><h3 class="post-title">
+      //   ${blog.title}
+      //   </h3></a>
+      //   <p class="time"><em> ${moment(blog.time).fromNow()}</em></p>
+
+      //   <div class="bottom-icons">
+      //     <p class="each-icon">
+      //       <i class="fa fa-commenting-o" aria-hidden="true"></i
+      //       ><span class="right">${blog.commentsCount}</span>
+      //     </p>
+      //     <p class="each-icon">
+      //       <i class="fa fa-eye" aria-hidden="true"></i>
+      //       <span class="right">${blog.views}</span>
+      //     </p>
+      //     <p class="each-icon">
+      //       <i class="fa fa-heart" aria-hidden="true"></i>
+      //       <span class="right">${blog.likes}</span>
+      //     </p>
+      //   </div>
+      //   <div class="post-options">
+      //    <a href="./editPost.html?id=${
+      //      doc.id
+      //    }"> <button class="edit">Edit</button></a>
+      //     <button class="delete" onclick="deletePost('${
+      //       doc.id
+      //     }')">Delete</button>
+      //   </div>
+      // </div>`;
+      // });
+      // postsContainer.innerHTML = html;
+      // document.querySelector('#views').textContent = totalViews;
+      // document.querySelector('#likes').textContent = totalLikes;
+      // document.querySelector('#comments').textContent = totalComments;
+      // document.querySelector('#posts').textContent = totalPosts;
+
+      // disableLoader();
+      // });
+
+      db.collection('Queries').onSnapshot((queries) => {
         queries.forEach((querie) => {
           totalQueries++;
         });
-        document.querySelector("#queries").textContent = totalQueries;
+        document.querySelector('#queries').textContent = totalQueries;
       });
 
-      db.collection("Subscribers").onSnapshot((subscribers) => {
-        subscribers.forEach((subscriber) => {
+      (async () => {
+        const res = await fetch(
+          'https://issa-portfolio-brand.herokuapp.com/blog/subscribe',
+        );
+        const subscribers = await res.json();
+        subscribers.data.subscribers.forEach((sub) => {
           totalSubscribers++;
-          document.querySelector("#subscribers").textContent = totalSubscribers;
         });
-      });
+        document.querySelector('#subscribers').textContent = totalSubscribers;
+      })();
+
+      // db.collection('Subscribers').onSnapshot((subscribers) => {
+      //   subscribers.forEach((subscriber) => {
+      //     totalSubscribers++;
+      //     document.querySelector('#subscribers').textContent = totalSubscribers;
+      //   });
+      // });
     </script>
   </body>
 </html>

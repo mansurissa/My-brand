@@ -53,104 +53,7 @@
     </div>
 
     <section class="page-container">
-      <div class="right-posts-container">
-        <!-- <div class="post-card">
-          <div class="left-blog-card">
-            <h3 class="post-title">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos in
-              explicabo repellat! Reprehenderit,
-            </h3>
-            <div class="posts-tags">
-              <p class="tech">
-                <i class="fa fa-tags" aria-hidden="true"></i
-                ><span class="tech">Tech</span>
-              </p>
-              <p class="business">
-                <i class="fa fa-tags" aria-hidden="true"></i
-                ><span class="business">Business</span>
-              </p>
-            </div>
-            <div class="bottom-icons">
-              <p class="time"><em> 2 days ago</em></p>
-              <p class="each-icon">
-                <i class="fa fa-commenting-o" aria-hidden="true"></i
-                ><span class="right">23</span>
-              </p>
-              <p class="each-icon">
-                <i class="fa fa-eye" aria-hidden="true"></i>
-                <span class="right">23</span>
-              </p>
-              <p class="each-icon">
-                <i class="fa fa-heart" aria-hidden="true"></i>
-                <span class="right">23</span>
-              </p>
-            </div>
-          </div>
-
-          <div class="right-blog-card">
-            <img src="../images/placeholder.png" alt="post image" />
-          </div>
-        </div> -->
-      </div>
-      <div class="left-container">
-        <div class="search">
-          <input type="text" placeholder="Search here.." class="search-input" />
-          <button class="search-btn" type="submit">
-            <i class="fa fa-search"></i>
-          </button>
-        </div>
-        <div class="tags">
-          <h3 class="tag-title">Tags</h3>
-          <div class="tags-right">
-            <p class="tech">
-              <i class="fa fa-tags" aria-hidden="true"></i
-              ><span class="tech">Tech</span>
-            </p>
-            <p class="business">
-              <i class="fa fa-tags" aria-hidden="true"></i
-              ><span class="business">Business</span>
-            </p>
-          </div>
-          <h3 class="tag-title resp-none">Popular Posts</h3>
-
-          <div class="popular-posts">
-            <h4 class="pop-title">
-              Lorem ipsum dolor sit amet consectetur, ione hic dolorum dolor
-              delectus esse eveniet amet ipsam
-            </h4>
-            <div class="bottom-icons">
-              <p class="time"><em> 2 days ago</em></p>
-              <p class="tech">
-                <i class="fa fa-tags" aria-hidden="true"></i>
-              </p>
-            </div>
-          </div>
-          <div class="popular-posts">
-            <h4 class="pop-title">
-              Lorem ipsum dolor sit amet consectetur, ione hic dolorum dolor
-              delectus esse eveniet amet ipsam
-            </h4>
-            <div class="bottom-icons">
-              <p class="time"><em> 2 days ago</em></p>
-              <p class="tech">
-                <i class="fa fa-tags" aria-hidden="true"></i>
-              </p>
-            </div>
-          </div>
-          <div class="popular-posts">
-            <h4 class="pop-title">
-              Lorem ipsum dolor sit amet consectetur, ione hic dolorum dolor
-              delectus esse eveniet amet ipsam
-            </h4>
-            <div class="bottom-icons">
-              <p class="time"><em> 2 days ago</em></p>
-              <p class="tech">
-                <i class="fa fa-tags" aria-hidden="true"></i>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="right-posts-container"></div>
     </section>
     <footer>
       <h2 class="title-footer">Follow Us On</h2>
@@ -184,64 +87,132 @@
 
     <script>
       const db = firebase.firestore();
-      const postsContainer = document.querySelector(".right-posts-container");
-      let subInput = document.querySelector(".email-input");
-      const subscribe = document.querySelector(".sub-btn");
-      db.collection("Posts").onSnapshot((results) => {
-        let html = "";
-        results.forEach((doc) => {
-          const blog = doc.data();
-          html += ` <div class="post-card">
-          <div class="left-blog-card">
-            <a href="../blog/readblog.html?id=${doc.id}"><h3 class="post-title">
-        ${blog.title}
-        </h3></a>
-            <div class="posts-tags">
-              <p class="tech">
-                <i class="fa fa-tags" aria-hidden="true"></i
-                ><span class="tech">Tech</span>
-              </p>
-              <p class="business">
-                <i class="fa fa-tags" aria-hidden="true"></i
-                ><span class="business">Business</span>
-              </p>
-            </div>
-            <div class="bottom-icons">
-              <p class="time"><em> ${moment(blog.time).fromNow()}</em></p>
-              <p class="each-icon">
-                <i class="fa fa-commenting-o" aria-hidden="true"></i
-                ><span class="right">${blog.commentsCount}</span>
-              </p>
-              <p class="each-icon">
-                <i class="fa fa-eye" aria-hidden="true"></i>
-                <span class="right">${blog.views}</span>
-              </p>
-              <p class="each-icon">
-                <i class="fa fa-heart" aria-hidden="true"></i>
-                <span class="right">${blog.likes}</span>
-              </p>
-            </div>
-          </div>
+      const postsContainer = document.querySelector('.right-posts-container');
+      let subInput = document.querySelector('.email-input');
+      const subscribe = document.querySelector('.sub-btn');
 
-          <div class="right-blog-card">
-            <img src="${blog.image}" alt="post image" />
-          </div>
-        </div>`;
-        });
-        disableLoader();
-        postsContainer.innerHTML = html;
-      });
+      (async () => {
+        try {
+          const res = await fetch(
+            'https://issa-portfolio-brand.herokuapp.com/blog',
+            {
+              method: 'GET',
+              headers: { 'content-Type': 'application/json' },
+            },
+          );
+          const fetchedPosts = await res.json();
+          const posts = fetchedPosts.data.posts;
+          console.log('posts:', posts);
+          let html = '';
+          await posts.forEach((post) => {
+            console.log(post);
+            html += ` <div class="post-card">
+         <div class="left-blog-card">
+           <a href="../blog/readblog.html?id=${
+             post._id
+           }"><h3 class="post-title">
+         ${post.title}
+         </h3></a>
+          
+           <div class="bottom-icons">
+             <p class="time"><em> ${moment(post.time).fromNow()}</em></p>
+             <p class="each-icon">
+               <i class="fa fa-commenting-o" aria-hidden="true"></i
+               ><span class="right">${post.commentsCount}</span>
+             </p>
+             <p class="each-icon">
+               <i class="fa fa-eye" aria-hidden="true"></i>
+               <span class="right">${post.views}</span>
+             </p>
+             <p class="each-icon">
+               <i class="fa fa-heart" aria-hidden="true"></i>
+               <span class="right">${post.likes}</span>
+             </p>
+           </div>
+         </div>
 
-      subscribe.addEventListener("click", () => {
-        console.log("clicked");
-        db.collection("Subscribers")
-          .add({
-            email: subInput.value,
-          })
-          .then(() => {
-            subInput = "";
-          })
-          .catch((err) => console.log(err));
+         <div class="right-blog-card">
+           <img src="${post.imageUrl}" alt="post image" class="post-img" />
+         </div>
+       </div>`;
+          });
+          disableLoader();
+          postsContainer.innerHTML = html;
+        } catch (error) {
+          console.log(error);
+        }
+      })();
+
+      // db.collection('Posts').onSnapshot((results) => {
+      //   let html = '';
+      //   results.forEach((doc) => {
+      //     const blog = doc.data();
+      //     html += `
+
+      //      <div class="post-card">
+      //     <div class="left-blog-card">
+      //       <a href="../blog/readblog.html?id=${doc.id}"><h3 class="post-title">
+      //     ${blog.title}
+      //     </h3></a>
+      //       <div class="posts-tags">
+      //         <p class="tech">
+      //           <i class="fa fa-tags" aria-hidden="true"></i
+      //           ><span class="tech">Tech</span>
+      //         </p>
+      //         <p class="business">
+      //           <i class="fa fa-tags" aria-hidden="true"></i
+      //           ><span class="business">Business</span>
+      //         </p>
+      //       </div>
+      //       <div class="bottom-icons">
+      //         <p class="time"><em> ${moment(blog.time).fromNow()}</em></p>
+      //         <p class="each-icon">
+      //           <i class="fa fa-commenting-o" aria-hidden="true"></i
+      //           ><span class="right">${blog.commentsCount}</span>
+      //         </p>
+      //         <p class="each-icon">
+      //           <i class="fa fa-eye" aria-hidden="true"></i>
+      //           <span class="right">${blog.views}</span>
+      //         </p>
+      //         <p class="each-icon">
+      //           <i class="fa fa-heart" aria-hidden="true"></i>
+      //           <span class="right">${blog.likes}</span>
+      //         </p>
+      //       </div>
+      //     </div>
+
+      //     <div class="right-blog-card">
+      //       <img src="${blog.image}" alt="post image" />
+      //     </div>
+      //   </div>`;
+      //   });
+      //   disableLoader();
+      //   postsContainer.innerHTML = html;
+      // });
+
+      subscribe.addEventListener('click', async () => {
+        console.log('clicked');
+        // db.collection("Subscribers")
+        //   .add({
+        //     email: subInput.value,
+        //   })
+        //   .then(() => {
+        //     subInput = "";
+        //   })
+        //   .catch((err) => console.log(err));
+
+        // =========================================
+
+        const subscriber = await fetch(
+          'https://issa-portfolio-brand.herokuapp.com/blog/subscribe',
+          {
+            method: 'post',
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: subInput.value,
+            }),
+          },
+        );
       });
     </script>
   </body>
