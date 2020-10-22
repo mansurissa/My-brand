@@ -223,7 +223,12 @@
       <h2 class="title-main" id="blog">BLOG</h2>
       <p class="last-posts">Latest posts from my blog</p>
       <div class="blog-posts-container">
-        <div class="each-post">
+        <div class="loader-container">
+          <div id="preloader">
+            <div id="loader"></div>
+          </div>
+        </div>
+        <!-- <div class="each-post">
           <div class="post-img">
             <img src="./images/placeholder.png" alt="blog" />
           </div>
@@ -278,7 +283,7 @@
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
           </h3>
           <button class="visit blog-btn"><a href="">Read More</a></button>
-        </div>
+        </div> -->
       </div>
       <button class="visit-github visit-blog">
         <a href="./blog/blogMain.html" target="#blank"> Visit Blog </a>
@@ -352,7 +357,25 @@
           return true;
         }
       };
-
+      fetch('https://issa-portfolio-brand.herokuapp.com/blog')
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          let html = '';
+          res.data.posts.forEach((blog) => {
+            html += `<div class="each-post">
+          <div class="post-img">
+            <img src="${blog.imageUrl}" alt="blog" />
+          </div>
+          <h3 class="post-title">
+          ${blog.title}
+          </h3>
+          <button class="visit blog-btn"><a href="/blog/readblog.html?id=${blog._id}">Read More</a></button>
+        </div>`;
+          });
+          document.querySelector('.blog-posts-container').innerHTML = html;
+        })
+        .catch(console.log);
       contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
 

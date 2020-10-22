@@ -53,8 +53,8 @@
     <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script> -->
 
     <script src="../js/firebase.js"></script>
     <script src="../js/app.js"></script>
@@ -76,7 +76,7 @@
 
       CKEDITOR.replace('body');
       let imageFile = null;
-      const db = firebase.firestore();
+      // const db = firebase.firestore();
       const uploader = document.querySelector('.uploader');
       const fileBtn = document.querySelector('.fileBtn');
       const postForm = document.querySelector('.create-blog-post');
@@ -100,22 +100,23 @@
         console.log('clicked');
 
         try {
-          const post = await fetch(
-            'https://issa-portfolio-brand.herokuapp.com/blog/create',
+          const fd = new FormData();
+
+          fd.append('image', imageFile);
+          fd.append('title', postForm.title.value);
+          fd.append('body', CKEDITOR.instances.body.getData());
+          const res = await fetch(
+            'https://issa-portfolio-brand.herokuapp.com/blog',
             {
               method: 'POST',
-              headers: { 'content-Type': 'application/json' },
-              body: JSON.stringify({
-                title: postForm.title.value,
-                image: imageFile,
-                body: CKEDITOR.instances.body.getData(),
-                likes: 0,
-                views: 0,
-                commentsCount: 0,
-                time: Date.now(),
-              }),
+              headers: {
+                Authorization:
+                  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwiaWQiOiI1Zjg1NjJhODQ3ODMwMDBhZWQzNzlmOWMifQ.YWKnswM8LQXPY11jfQ8Mcg4g__XJ7lv56rZ1CG-UGjA',
+              },
+              body: fd,
             },
           );
+          const post = await res.json();
           console.log(post);
 
           postForm.reset();
