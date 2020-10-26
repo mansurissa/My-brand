@@ -34,20 +34,6 @@
         <div class="line"></div>
       </div>
     </nav>
-    <div class="call-to-subscribe">
-      <p class="sub-text">
-        Get notified on a new post. <span>No spam, ever</span>
-      </p>
-      <div class="subscribe">
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter Your Email.."
-          class="email-input"
-        />
-        <button class="sub-btn" type="button">Subscribe</button>
-      </div>
-    </div>
 
     <section class="page-container">
       <div class="right-posts-container">
@@ -56,6 +42,21 @@
           <i class="fa fa-thumbs-o-up" aria-hidden="true"></i
           ><span class="right">0</span>
         </p>
+        <div class="call-to-subscribe">
+          <p class="sub-text">
+            Get notified on a new post. <span>No spam, ever</span>
+          </p>
+          <div class="subscribe">
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter Your Email.."
+              class="email-input"
+            />
+            <button class="sub-btn" type="button">Subscribe</button>
+          </div>
+        </div>
+
         <h2 class="title-main comments-title">Please leave a Comment</h2>
 
         <section class="comments-section">
@@ -72,6 +73,7 @@
         <section class="comments-container"></section>
       </div>
     </section>
+
     <footer>
       <h2 class="title-footer">Follow Us On</h2>
       <ul class="socials">
@@ -118,17 +120,18 @@
 
       (async () => {
         const res = await fetch(
-          `https://issa-portfolio-brand.herokuapp.com/blog/${postId}`,
+          `https://issa-portfolio-brand.herokuapp.com/blogs/${postId}`,
         );
         const postData = await res.json();
         const post = postData.data;
         post.views += 1;
 
         let html = `
-                <img src="${post.imageUrl}" alt="" class="post-img" />
                 <h2 class="title onRead-title">
                   ${post.title}
                 </h2>
+                <img src="${post.imageUrl}" alt="" class="post-img" />
+                
                 <div class="onRead-post">
                   <p>
                     ${post.body}
@@ -163,7 +166,7 @@
         comment.value.length > 5 &&
           (async () => {
             await fetch(
-              `https://issa-portfolio-brand.herokuapp.com/blog/${postId}/comment`,
+              `https://issa-portfolio-brand.herokuapp.com/blogs/${postId}/comment`,
               {
                 method: 'post',
                 headers: { 'content-Type': 'application/json' },
@@ -196,12 +199,13 @@
 
       (async () => {
         const res = await fetch(
-          `https://issa-portfolio-brand.herokuapp.com/blog/${postId}/allComments`,
+          `https://issa-portfolio-brand.herokuapp.com/blogs/${postId}/allComments`,
         );
         const comments = await res.json();
         let html = '';
         comments.data.forEach((comment) => {
-          html += ` <div class="each-comment">
+          html += `
+           <div class="each-comment">
                   <div class="comment-details">
                     <p class="author">--<em>${comment.name}</em>--</p>
                     <p class="comment-time"> ${moment(
@@ -240,19 +244,9 @@
 
       subscribe.addEventListener('click', async () => {
         console.log('clicked');
-        // db.collection("Subscribers")
-        //   .add({
-        //     email: subInput.value,
-        //   })
-        //   .then(() => {
-        //     subInput = "";
-        //   })
-        //   .catch((err) => console.log(err));
-
-        // =========================================
 
         const res = await fetch(
-          'https://issa-portfolio-brand.herokuapp.com/blog/subscribe',
+          'https://issa-portfolio-brand.herokuapp.com/blogs/subscribe',
           {
             method: 'post',
             headers: { 'content-Type': 'application/json' },
@@ -263,13 +257,24 @@
         );
         const subscriber = await res.json();
         console.log(subscriber);
+
+        // db.collection("Subscribers")
+        //   .add({
+        //     email: subInput.value,
+        //   })
+        //   .then(() => {
+        //     subInput = "";
+        //   })
+        //   .catch((err) => console.log(err));
+
+        // =========================================
       });
 
       const like = document.querySelector('.like');
 
       like.addEventListener('click', async () => {
         await fetch(
-          `https://issa-portfolio-brand.herokuapp.com/blog/${postId}`,
+          `https://issa-portfolio-brand.herokuapp.com/blogs/${postId}`,
           {
             method: 'put',
             headers: { 'content-Type': 'application/json' },

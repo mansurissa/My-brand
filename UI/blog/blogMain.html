@@ -55,6 +55,7 @@
     <section class="page-container">
       <div class="right-posts-container"></div>
     </section>
+
     <footer>
       <h2 class="title-footer">Follow Us On</h2>
       <ul class="socials">
@@ -94,7 +95,7 @@
       (async () => {
         try {
           const res = await fetch(
-            'https://issa-portfolio-brand.herokuapp.com/blog',
+            'https://issa-portfolio-brand.herokuapp.com/blogs',
             {
               method: 'GET',
               headers: { 'content-Type': 'application/json' },
@@ -204,7 +205,7 @@
         // =========================================
 
         const subscriber = await fetch(
-          'https://issa-portfolio-brand.herokuapp.com/blog/subscribe',
+          'https://issa-portfolio-brand.herokuapp.com/blogs/subscribe',
           {
             method: 'post',
             headers: { 'content-Type': 'application/json' },

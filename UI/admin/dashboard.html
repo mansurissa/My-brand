@@ -148,7 +148,7 @@
         confirmation &&
           (async () => {
             await fetch(
-              `https://issa-portfolio-brand.herokuapp.com/blog/${id}`,
+              `https://issa-portfolio-brand.herokuapp.com/blogs/${id}`,
               {
                 method: 'delete',
                 headers: { 'content-Type': 'application/json' },
@@ -169,10 +169,11 @@
       //   let html = "";
       (async () => {
         const res = await fetch(
-          'https://issa-portfolio-brand.herokuapp.com/blog',
+          'https://issa-portfolio-brand.herokuapp.com/blogs',
         );
         let html = '';
         const data = await res.json();
+        console.log(data);
         data.data.posts.forEach((post) => {
           totalPosts++;
 
@@ -182,10 +183,12 @@
 
           html += `<div class="each-post">
         <div class="post-img">
-          <img src="${post.imageUrl}" />
+          <a href="../blog/readblog.html?id=${post._id}"> <img src="${
+            post.imageUrl
+          }" /></a>
         </div>
        
-        <a href="../blog/readblog.html?id=${post._id}")><h3 class="post-title">
+        <a href="../blog/readblog.html?id=${post._id}"><h3 class="post-title">
         ${post.title}
         </h3></a>
         <p class="time"><em> ${moment(post.time).fromNow()}</em></p>
@@ -291,7 +294,7 @@
 
       (async () => {
         const res = await fetch(
-          'https://issa-portfolio-brand.herokuapp.com/blog/subscribe',
+          'https://issa-portfolio-brand.herokuapp.com/blogs/subscribe',
         );
         const subscribers = await res.json();
         subscribers.data.subscribers.forEach((sub) => {

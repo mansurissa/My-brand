@@ -16,7 +16,7 @@
         <h1 class="title">My Brand</h1>
         <ul class="nav-links">
           <li class="nav-link"><a href="./dashboard.html">Dashboard</a></li>
-          <li class="nav-link"><a href="">New Post</a></li>
+          <li class="nav-link"><a href="./newPost.html">New Post</a></li>
           <li class="nav-link"><a href="./queries.html">Queries</a></li>
           <li class="nav-link profile-wrapper">
             <a href="#">
@@ -35,6 +35,7 @@
         <div class="line"></div>
       </div>
     </nav>
+
     <section class="create-post">
       <form class="create-blog-post">
         <h3 class="post-title">Edit title of Post</h3>
@@ -90,6 +91,18 @@
       const preview = document.querySelector('.preview');
       const cancelBtn = document.querySelector('.cancel');
 
+      (async () => {
+        const res = await fetch(
+          `https://issa-portfolio-brand.herokuapp.com/blogs/${postId}`,
+        );
+        const fetchedPost = await res.json();
+        const post = fetchedPost.data;
+        console.log('Post:', fetchedPost);
+        postForm.title.value = post.title;
+        postForm.body.value = post.body;
+        preview.src = post.imageUrl;
+      })();
+
       cancelBtn.addEventListener('click', () => {
         location.href = 'dashboard.html';
       });
@@ -106,16 +119,6 @@
         }
       });
 
-      (async () => {
-        const res = await fetch(
-          `https://issa-portfolio-brand.herokuapp.com/blog/${postId}`,
-        );
-        const fetchedPost = await res.json();
-        const post = fetchedPost.data;
-        postForm.title.value = post.title;
-        postForm.body.value = post.body;
-        preview.src = post.imageUrl;
-      })();
       // function fetchPost(id) {
       //   firebase
       //     .firestore()
@@ -131,9 +134,8 @@
       //     .catch(console.log);
       // }
 
-      postForm.addEventListener('submit', (e) => {
+      postForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-
         try {
           const fd = new FormData();
 
@@ -141,25 +143,20 @@
           fd.append('title', postForm.title.value);
           fd.append('body', CKEDITOR.instances.body.getData());
           const res = await fetch(
-            `https://issa-portfolio-brand.herokuapp.com/blog/${postId}`,
+            `https://issa-portfolio-brand.herokuapp.com/blogs/${postId}`,
             {
-              method: 'patch',
-              headers: { 'content-Type': 'application/json' },
+              method: 'PATCH',
+              headers: {},
               body: fd,
             },
           );
           const post = await res.json();
           console.log(post);
 
-          postForm.reset();
-          preview.innerHTML = '';
-          location.href = 'dashboard.html';
+          // location.href = 'dashboard.html';
         } catch (error) {
           console.log(error);
         }
-
-
-
 
         // const postImage = imageFile;
         // const storageRef = firebase

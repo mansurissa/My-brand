@@ -261,7 +261,7 @@ a {
 .post-title {
   color: var(--special);
   font-weight: normal;
-  margin: 2rem 0;
+  margin: 2rem 0 2rem 0;
   text-transform: capitalize;
 }
 .blog-btn {
@@ -486,6 +486,7 @@ a.active {
 }
 .create-btn {
   margin-top: 1.5rem;
+  cursor: pointer;
 }
 .imgPreview {
   max-width: 500px;
@@ -688,6 +689,7 @@ h4 {
 }
 .onRead-title {
   font-size: 1.5rem;
+  margin: 6rem 0 2rem 0;
 }
 .comments-section {
   display: flex;

@@ -106,7 +106,7 @@
           fd.append('title', postForm.title.value);
           fd.append('body', CKEDITOR.instances.body.getData());
           const res = await fetch(
-            'https://issa-portfolio-brand.herokuapp.com/blog',
+            'https://issa-portfolio-brand.herokuapp.com/blogs',
             {
               method: 'POST',
               headers: {
