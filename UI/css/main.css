@@ -40,7 +40,10 @@ body {
   text-transform: capitalize;
 }
 header {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='960' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask3146%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='url(%23SvgjsRadialGradient3147)'%3e%3c/rect%3e%3cpath d='M1440 0L1339.31 0L1440 87.37z' fill='rgba(255%2c 255%2c 255%2c .1)'%3e%3c/path%3e%3cpath d='M1339.31 0L1440 87.37L1440 265.63L699.9599999999999 0z' fill='rgba(255%2c 255%2c 255%2c .075)'%3e%3c/path%3e%3cpath d='M699.96 0L1440 265.63L1440 440.71000000000004L675.76 0z' fill='rgba(255%2c 255%2c 255%2c .05)'%3e%3c/path%3e%3cpath d='M675.76 0L1440 440.71000000000004L1440 490.84000000000003L558.63 0z' fill='rgba(255%2c 255%2c 255%2c .025)'%3e%3c/path%3e%3cpath d='M0 560L694.81 560L0 312.43z' fill='rgba(0%2c 0%2c 0%2c .1)'%3e%3c/path%3e%3cpath d='M0 312.43L694.81 560L1044.86 560L0 253.11z' fill='rgba(0%2c 0%2c 0%2c .075)'%3e%3c/path%3e%3cpath d='M0 253.11L1044.86 560L1105.1799999999998 560L0 233.95000000000002z' fill='rgba(0%2c 0%2c 0%2c .05)'%3e%3c/path%3e%3cpath d='M0 233.95L1105.1799999999998 560L1204.2999999999997 560L0 233.72z' fill='rgba(0%2c 0%2c 0%2c .025)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask3146'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3cradialGradient cx='0%25' cy='0%25' r='1545.06' gradientUnits='userSpaceOnUse' id='SvgjsRadialGradient3147'%3e%3cstop stop-color='rgba(32%2c 86%2c 200%2c 1)' offset='0.06'%3e%3c/stop%3e%3cstop stop-color='rgba(0%2c 60%2c 188%2c 1)' offset='0.18'%3e%3c/stop%3e%3cstop stop-color='rgba(0%2c 60%2c 188%2c 1)' offset='0.18'%3e%3c/stop%3e%3cstop stop-color='rgba(0%2c 60%2c 188%2c 1)' offset='0.26'%3e%3c/stop%3e%3cstop stop-color='rgba(0%2c 60%2c 188%2c 1)' offset='0.27'%3e%3c/stop%3e%3cstop stop-color='rgba(22%2c 78%2c 197%2c 1)' offset='0.29'%3e%3c/stop%3e%3cstop stop-color='rgba(0%2c 60%2c 188%2c 1)' offset='0.29'%3e%3c/stop%3e%3cstop stop-color='rgba(0%2c 60%2c 188%2c 1)' offset='0.37'%3e%3c/stop%3e%3cstop stop-color='rgba(22%2c 66%2c 197%2c 1)' offset='0.42'%3e%3c/stop%3e%3cstop stop-color='rgba(17%2c 56%2c 172%2c 1)' offset='0.42'%3e%3c/stop%3e%3cstop stop-color='rgba(0%2c 61%2c 193%2c 1)' offset='0.5'%3e%3c/stop%3e%3cstop stop-color='rgba(0%2c 59%2c 184%2c 1)' offset='0.57'%3e%3c/stop%3e%3cstop stop-color='rgba(1%2c 58%2c 179%2c 1)' offset='0.65'%3e%3c/stop%3e%3cstop stop-color='rgba(22%2c 78%2c 197%2c 1)' offset='0.72'%3e%3c/stop%3e%3cstop stop-color='rgba(22%2c 78%2c 197%2c 1)' offset='0.75'%3e%3c/stop%3e%3cstop stop-color='rgba(22%2c 78%2c 197%2c 1)' offset='0.75'%3e%3c/stop%3e%3cstop stop-color='rgba(22%2c 66%2c 197%2c 1)' offset='0.75'%3e%3c/stop%3e%3cstop stop-color='rgba(22%2c 78%2c 197%2c 1)' offset='0.76'%3e%3c/stop%3e%3cstop stop-color='rgba(22%2c 78%2c 197%2c 1)' offset='0.86'%3e%3c/stop%3e%3c/radialGradient%3e%3c/defs%3e%3c/svg%3e");
+  background-color: #4211d4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg fill-opacity='0.9'%3E%3Cpolygon fill='%233f14cc' points='1600 160 0 460 0 350 1600 50'/%3E%3Cpolygon fill='%233c17c3' points='1600 260 0 560 0 450 1600 150'/%3E%3Cpolygon fill='%233819bb' points='1600 360 0 660 0 550 1600 250'/%3E%3Cpolygon fill='%23351cb2' points='1600 460 0 760 0 650 1600 350'/%3E%3Cpolygon fill='%23321faa' points='1600 800 0 800 0 750 1600 450'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
 }
 .nav {
   border-bottom: solid 2px var(--secondary-color);
@@ -354,7 +357,6 @@ footer ul {
 
 /* ===== Login page ===== */
 .login {
-  background: var(--secondary-color);
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -368,9 +370,8 @@ footer ul {
   margin: auto;
   border-radius: 6px;
   box-shadow: 0 0 10px;
-  border-bottom: 5px var(--link-color) solid;
-  border-top: 5px rgb(165, 167, 168) solid;
-  background: transparent;
+  border-bottom: 5px rgb(69, 151, 245) solid;
+  background: var(--secondary-color);
 }
 .login-page input {
   background: var(--main-color);
