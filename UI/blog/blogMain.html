@@ -37,27 +37,34 @@
         <div id="loader"></div>
       </div>
     </div>
-    <div class="call-to-subscribe">
-      <p class="sub-text">
-        Get notified on a new post. <span>No spam, ever</span>
-      </p>
-      <div class="subscribe">
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter Your Email.."
-          class="email-input"
-        />
-        <button class="sub-btn" type="submit">Subscribe</button>
-      </div>
-    </div>
 
-    <section class="page-container">
-      <div class="right-posts-container"></div>
+    <!-- ===SUBSCRIBE====== -->
+    <section class="subscribe-sec">
+      <div class="subscribe_header">
+        <h3>Subsribe To My Newsletter</h3>
+        <p>You will not be spamed ever..</p>
+        <button class="button special-link shadow-btn">
+          <a href="#00" id="subscribe_btn" class="special-link">Subscribe</a>
+        </button>
+      </div>
+      <div class="bg-modal" id="bg-modal">
+        <div class="modal-contents">
+          <div class="close">+</div>
+          <form class="white-input">
+            <input type="email" placeholder="Please enter your e-mail" />
+            <button class="button special-link shadow-btn">
+              <a href="#00" class="sub-btn">Subscribe</a>
+            </button>
+          </form>
+        </div>
+      </div>
     </section>
+    <div class="success"></div>
+    <!-- ================== -->
+    <section class="posts-container"></section>
 
     <footer>
-      <h2 class="title-footer">Follow Us On</h2>
+      <h2 class="title-main f-title">Follow Us On</h2>
       <ul class="socials">
         <li class="each-li">
           <a href="https://github.com/mansurissa" target="_blank"
@@ -81,14 +88,12 @@
     </footer>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="../js/firebase.js"></script>
     <script src="../js/app.js"></script>
 
     <script>
-      const db = firebase.firestore();
-      const postsContainer = document.querySelector('.right-posts-container');
+      const postsContainer = document.querySelector('.posts-container');
       let subInput = document.querySelector('.email-input');
       const subscribe = document.querySelector('.sub-btn');
 
@@ -108,102 +113,53 @@
           await posts.forEach((post) => {
             console.log(post);
             html += ` <div class="post-card">
-         <div class="left-blog-card">
-           <a href="../blog/readblog.html?id=${
-             post._id
-           }"><h3 class="post-title">
-         ${post.title}
-         </h3></a>
-          
-           <div class="bottom-icons">
-             <p class="time"><em> ${moment(post.time).fromNow()}</em></p>
-             <p class="each-icon">
-               <i class="fa fa-commenting-o" aria-hidden="true"></i
-               ><span class="right">${post.commentsCount}</span>
-             </p>
-             <p class="each-icon">
-               <i class="fa fa-eye" aria-hidden="true"></i>
-               <span class="right">${post.views}</span>
-             </p>
-             <p class="each-icon">
-               <i class="fa fa-heart" aria-hidden="true"></i>
-               <span class="right">${post.likes}</span>
-             </p>
-           </div>
-         </div>
+        <div class="left-blog-card">
+          <a
+            href="../blog/readblog.html?id=${post._id}"
+            ><h3 class="title-blog">
+            ${post.title}
+            </h3></a
+          >
+          <div class="para-blog">
+           ${post.body}
+          </div>
 
-         <div class="right-blog-card">
-           <img src="${post.imageUrl}" alt="post image" class="post-img" />
-         </div>
-       </div>`;
+          <div class="bottom-icons">
+             <p class="time"><em> ${moment(post.time).fromNow()}</em></p>
+            <p class="each-icon">
+              <i class="fa fa-commenting-o" aria-hidden="true"></i
+              ><span class="right-icon">${post.commentsCount}</span>
+            </p>
+            <p class="each-icon">
+              <i class="fa fa-eye" aria-hidden="true"></i>
+              <span class="right-icon">${post.views}</span>
+            </p>
+            <p class="each-icon">
+              <i class="fa fa-heart" aria-hidden="true"></i>
+              <span class="right-icon">${post.likes}</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="right-blog-card">
+          <a
+            href="../blog/readblog.html?id=${post._id}"
+            > <img
+            src="${post.imageUrl}"
+            alt="post image"
+            class="post-img blog-img"
+          /></a>
+        </div>
+      </div>`;
           });
-          disableLoader();
           postsContainer.innerHTML = html;
+          disableLoader();
         } catch (error) {
           console.log(error);
         }
       })();
 
-      // db.collection('Posts').onSnapshot((results) => {
-      //   let html = '';
-      //   results.forEach((doc) => {
-      //     const blog = doc.data();
-      //     html += `
-
-      //      <div class="post-card">
-      //     <div class="left-blog-card">
-      //       <a href="../blog/readblog.html?id=${doc.id}"><h3 class="post-title">
-      //     ${blog.title}
-      //     </h3></a>
-      //       <div class="posts-tags">
-      //         <p class="tech">
-      //           <i class="fa fa-tags" aria-hidden="true"></i
-      //           ><span class="tech">Tech</span>
-      //         </p>
-      //         <p class="business">
-      //           <i class="fa fa-tags" aria-hidden="true"></i
-      //           ><span class="business">Business</span>
-      //         </p>
-      //       </div>
-      //       <div class="bottom-icons">
-      //         <p class="time"><em> ${moment(blog.time).fromNow()}</em></p>
-      //         <p class="each-icon">
-      //           <i class="fa fa-commenting-o" aria-hidden="true"></i
-      //           ><span class="right">${blog.commentsCount}</span>
-      //         </p>
-      //         <p class="each-icon">
-      //           <i class="fa fa-eye" aria-hidden="true"></i>
-      //           <span class="right">${blog.views}</span>
-      //         </p>
-      //         <p class="each-icon">
-      //           <i class="fa fa-heart" aria-hidden="true"></i>
-      //           <span class="right">${blog.likes}</span>
-      //         </p>
-      //       </div>
-      //     </div>
-
-      //     <div class="right-blog-card">
-      //       <img src="${blog.image}" alt="post image" />
-      //     </div>
-      //   </div>`;
-      //   });
-      //   disableLoader();
-      //   postsContainer.innerHTML = html;
-      // });
-
       subscribe.addEventListener('click', async () => {
-        console.log('clicked');
-        // db.collection("Subscribers")
-        //   .add({
-        //     email: subInput.value,
-        //   })
-        //   .then(() => {
-        //     subInput = "";
-        //   })
-        //   .catch((err) => console.log(err));
-
-        // =========================================
-
         const subscriber = await fetch(
           'https://issa-portfolio-brand.herokuapp.com/blogs/subscribe',
           {
@@ -214,6 +170,9 @@
             }),
           },
         );
+        document.querySelector(
+          '.success',
+        ).innerHTML = `<p class="success"><i class="fa fa-check" aria-hidden="true"></i>Successfully subscribed!</p>`;
       });
     </script>
   </body>
