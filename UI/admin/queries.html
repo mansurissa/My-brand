@@ -46,8 +46,8 @@
     <section class="queries-container">
       <!-- <div class="single-query">
         <div class="disp-flex">
-          <h2 class="title commenter-name">name</h2>
-          <p class="time">3 day ago</p>
+          <h2 class="title-main commenter-name">name</h2>
+          <em><p class="time">3 day ago</p></em>
         </div>
         <p>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias
@@ -56,7 +56,7 @@
         </p>
         <div class="disp-flex">
           <p class="sender-email">tester@gmail.com</p>
-          <i class="fa fa-trash-o" aria-hidden="true"></i>
+          <i class="fa fa-trash-o delete-icon" aria-hidden="true"></i>
         </div>
       </div> -->
     </section>
@@ -70,22 +70,22 @@
     <script>
       const auth = firebase.auth();
       const db = firebase.firestore();
-      const logout = document.querySelector(".logout");
-      const queries = document.querySelector(".queries-container");
+      const logout = document.querySelector('.logout');
+      const queries = document.querySelector('.queries-container');
 
       auth.onAuthStateChanged((user) => {
         if (user) {
         } else {
-          location.href = "login.html";
+          location.href = 'login.html';
         }
       });
-      logout.addEventListener("click", (e) => {
+      logout.addEventListener('click', (e) => {
         e.preventDefault();
         auth.signOut().catch(console.log);
       });
 
-      db.collection("Queries").onSnapshot((results) => {
-        let html = "";
+      db.collection('Queries').onSnapshot((results) => {
+        let html = '';
         results.forEach((doc) => {
           html += `<div class="single-query">
         <div class="disp-flex">
@@ -97,7 +97,7 @@
         </p>
         <div class="disp-flex">
           <p class="sender-email"><em>${doc.data().email}</em></p>
-          <i class="fa fa-trash-o delete-query" aria-hidden="true" onclick="deleteQuery('${
+          <i class="fa fa-trash-o delete-icon" aria-hidden="true" onclick="deleteQuery('${
             doc.id
           }')"></i>
         </div>
@@ -108,11 +108,11 @@
       });
 
       function deleteQuery(id) {
-        db.collection("Queries")
+        db.collection('Queries')
           .doc(id)
           .delete()
           .then(() => {
-            console.log("Document successfully deleted!");
+            console.log('Document successfully deleted!');
           })
           .catch(console.log);
       }

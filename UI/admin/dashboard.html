@@ -10,20 +10,21 @@
     <link rel="stylesheet" href="/UI/css/main.css" />
     <title>Dashboard</title>
   </head>
-  <body>
-    <nav class="nav">
+  <body class="db">
+    <nav class="nav dash-nav">
       <div class="links">
         <h1 class="title">My Brand</h1>
         <ul class="nav-links">
           <li class="nav-link"><a href="" class="active">Dashboard</a></li>
           <li class="nav-link"><a href="./newPost.html">New Post</a></li>
           <li class="nav-link"><a href="./queries.html">Queries</a></li>
+          <li class="nav-link over-btn"><a>Over view</a></li>
           <li class="nav-link profile-wrapper">
-            <a href="#">
-              <img src="/UI/images/my-pic.png" class="avatar" alt="profile" />
-            </a>
+            <img src="/UI/images/my-pic.png" class="avatar" alt="profile" />
             <div class="dd-menu">
-              <p class="dd-link"><a href="./editProfile.html">Profile</a></p>
+              <p class="dd-link">
+                <a href="./editProfile.html">Profile</a>
+              </p>
               <p class="dd-link"><a href="" class="logout">Logout</a></p>
             </div>
           </li>
@@ -35,6 +36,56 @@
         <div class="line"></div>
       </div>
     </nav>
+    <div class="hidden-over none">
+      <section class="over-hidden">
+        <div class="over-view">
+          <div class="close-btn">+</div>
+          <div class="card-over-view posts">
+            <i class="fa fa-list" aria-hidden="true"></i>
+            <div class="left-overview">
+              <p class="overview-item posts">Posts</p>
+              <p class="right-nbr" id="posts"></p>
+            </div>
+          </div>
+          <div class="card-over-view likes">
+            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+            <div class="left-overview">
+              <p class="overview-item likes">Likes</p>
+              <p class="right-nbr" id="likes"></p>
+            </div>
+          </div>
+          <div class="card-over-view views">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            <div class="left-overview">
+              <p class="overview-item views">Views</p>
+              <p class="right-nbr" id="views"></p>
+            </div>
+          </div>
+
+          <div class="card-over-view queries">
+            <i class="fa fa-feed" aria-hidden="true"></i>
+            <div class="left-overview">
+              <p class="overview-item queries">Queries</p>
+              <p class="right-nbr" id="queries"></p>
+            </div>
+          </div>
+          <div class="card-over-view comment">
+            <i class="fa fa-comment-o" aria-hidden="true"></i>
+            <div class="left-overview">
+              <p class="overview-item comments">Comments</p>
+              <p class="right-nbr" id="comments"></p>
+            </div>
+          </div>
+          <div class="card-over-view subs">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <div class="left-overview">
+              <p class="overview-item subs">Subscribers</p>
+              <p class="right-nbr" id="subscribers"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
     <!-- loader -->
     <div class="loader-container">
       <div id="preloader">
@@ -43,75 +94,57 @@
     </div>
     <!-- loader ends here -->
 
-    <section class="overview-wrapper">
+    <section class="left">
       <div class="over-view">
-        <div class="card-over-view">
-          <p class="overview-item posts">Posts:</p>
-          <p class="right-nbr" id="posts">0</p>
+        <div class="card-over-view posts">
+          <i class="fa fa-list" aria-hidden="true"></i>
+          <div class="left-overview">
+            <p class="overview-item posts">Posts</p>
+            <p class="right-nbr" id="posts"></p>
+          </div>
         </div>
-        <div class="card-over-view">
-          <p class="overview-item comments">Comments:</p>
-          <p class="right-nbr" id="comments">0</p>
+        <div class="card-over-view likes">
+          <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+          <div class="left-overview">
+            <p class="overview-item likes">Likes</p>
+            <p class="right-nbr" id="likes"></p>
+          </div>
         </div>
-        <div class="card-over-view">
-          <p class="overview-item subs">Subscribers:</p>
-          <p class="right-nbr" id="subscribers">0</p>
+        <div class="card-over-view views">
+          <i class="fa fa-eye" aria-hidden="true"></i>
+          <div class="left-overview">
+            <p class="overview-item views">Views</p>
+            <p class="right-nbr" id="views"></p>
+          </div>
         </div>
-        <div class="card-over-view">
-          <p class="overview-item likes">Likes:</p>
-          <p class="right-nbr" id="likes">0</p>
+
+        <div class="card-over-view queries">
+          <i class="fa fa-feed" aria-hidden="true"></i>
+          <div class="left-overview">
+            <p class="overview-item queries">Queries</p>
+            <p class="right-nbr" id="queries"></p>
+          </div>
         </div>
-        <div class="card-over-view">
-          <p class="overview-item queries">Queries:</p>
-          <p class="right-nbr" id="queries">0</p>
+        <div class="card-over-view comment">
+          <i class="fa fa-comment-o" aria-hidden="true"></i>
+          <div class="left-overview">
+            <p class="overview-item comments">Comments</p>
+            <p class="right-nbr" id="comments"></p>
+          </div>
         </div>
-        <div class="card-over-view">
-          <p class="overview-item views">Views:</p>
-          <p class="right-nbr" id="views">0</p>
+        <div class="card-over-view subs">
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+          <div class="left-overview">
+            <p class="overview-item subs">Subscribers</p>
+            <p class="right-nbr" id="subscribers"></p>
+          </div>
         </div>
       </div>
     </section>
-
-    <section class="blog-posts-container">
-      <!-- <div class="each-post">
-        <div class="post-img">
-          <img src="../images/placeholder.png" alt="blog" />
-        </div>
-        <div class="posts-tags">
-          <p class="tech">
-            <i class="fa fa-tags" aria-hidden="true"></i
-            ><span class="tech">Tech</span>
-          </p>
-          <p class="business">
-            <i class="fa fa-tags" aria-hidden="true"></i
-            ><span class="business">Business</span>
-          </p>
-        </div>
-        <h3 class="post-title">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-        </h3>
-        <p class="time"><em> 2 days ago</em></p>
-
-        <div class="bottom-icons">
-          <p class="each-icon">
-            <i class="fa fa-commenting-o" aria-hidden="true"></i
-            ><span class="right">23</span>
-          </p>
-          <p class="each-icon">
-            <i class="fa fa-eye" aria-hidden="true"></i>
-            <span class="right">23</span>
-          </p>
-          <p class="each-icon">
-            <i class="fa fa-heart" aria-hidden="true"></i>
-            <span class="right">23</span>
-          </p>
-        </div>
-        <div class="post-options">
-          <button class="edit">Edit</button>
-          <button class="delete">Delete</button>
-        </div>
-      </div> -->
+    <section class="right">
+      <div class="blog-posts-container"></div>
     </section>
+
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
@@ -144,152 +177,101 @@
       });
 
       function deletePost(id) {
+        console.log(id);
         const confirmation = confirm('Are you sure deleting this post?');
         confirmation &&
           (async () => {
             await fetch(
               `https://issa-portfolio-brand.herokuapp.com/blogs/${id}`,
               {
-                method: 'delete',
+                method: 'DELETE',
                 headers: { 'content-Type': 'application/json' },
               },
             );
-            console.log('deleted successfully');
             location.reload();
           })();
-        // db
-        //   .collection('Posts')
-        //   .doc(id)
-        //   .delete()
-        //   .then(() => console.log('deleted post successfully'))
-        //   .catch(console.log);
       }
 
-      // db.collection("Posts").onSnapshot((results) => {
-      //   let html = "";
       (async () => {
         const res = await fetch(
           'https://issa-portfolio-brand.herokuapp.com/blogs',
         );
         let html = '';
         const data = await res.json();
-        console.log(data);
         data.data.posts.forEach((post) => {
           totalPosts++;
-
           totalViews += post.views;
           totalComments += post.commentsCount;
           totalLikes += post.likes;
 
           html += `<div class="each-post">
-        <div class="post-img">
-          <a href="../blog/readblog.html?id=${post._id}"> <img src="${
-            post.imageUrl
-          }" /></a>
-        </div>
-       
-        <a href="../blog/readblog.html?id=${post._id}"><h3 class="post-title">
-        ${post.title}
-        </h3></a>
-        <p class="time"><em> ${moment(post.time).fromNow()}</em></p>
+          <div>
+            <a href="../blog/readblog.html?id=${post._id}">
+             <img src="${
+               post.imageUrl
+             }" alt="blog" class="post-img img-dash" /></a>
+          </div>
+          <div class="bottom-post">
+            <a href="../blog/readblog.html?id=${post._id}" class="dash-title">
+            <h3 class="title-main dash-title">${post.title}</h3></a>
 
-        <div class="bottom-icons">
-          <p class="each-icon">
-            <i class="fa fa-commenting-o" aria-hidden="true"></i
-            ><span class="right">${post.commentsCount}</span>
-          </p>
-          <p class="each-icon">
-            <i class="fa fa-eye" aria-hidden="true"></i>
-            <span class="right">${post.views}</span>
-          </p>
-          <p class="each-icon">
-            <i class="fa fa-heart" aria-hidden="true"></i>
-            <span class="right">${post.likes}</span>
-          </p>
-        </div>
-        <div class="post-options">
-         <a href="./editPost.html?id=${
-           post._id
-         }"> <button class="edit">Edit</button></a>
-          <button class="delete" onclick="deletePost('${
-            post._id
-          }')">Delete</button>
-        </div>
-      </div>`;
+            <div class="bottom-icons">
+              <p class="time"><em> ${moment(post.time).fromNow()}</em></p>
+              <p class="each-icon">
+                <i class="fa fa-commenting-o" aria-hidden="true"></i
+                ><span class="right-icon">${post.commentsCount}</span>
+              </p>
+              <p class="each-icon">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+                <span class="right-icon">${post.views}</span>
+              </p>
+              <p class="each-icon">
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                <span class="right-icon">${post.likes}</span>
+              </p>
+            </div>
+            <div class="post-options">
+              <a
+                href="./editPost.html?id=${post._id}"
+              >
+                <button class="edit button special-link shadow-btn">
+                  Edit
+                </button></a
+              >
+              <button
+                class="delete button special-link shadow-btn"
+                onclick="deletePost('${post._id}')"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>`;
         });
         postsContainer.innerHTML = html;
-        document.querySelector('#views').textContent = totalViews;
-        document.querySelector('#likes').textContent = totalLikes;
-        document.querySelector('#comments').textContent = totalComments;
-        document.querySelector('#posts').textContent = totalPosts;
+        document.querySelectorAll('#views').forEach((item) => {
+          item.textContent = totalViews;
+        });
+        document.querySelectorAll('#likes').forEach((item) => {
+          item.textContent = totalLikes;
+        });
+        document.querySelectorAll('#comments').forEach((item) => {
+          item.textContent = totalComments;
+        });
 
+        document.querySelectorAll('#posts').forEach((item) => {
+          item.textContent = totalPosts;
+        });
         disableLoader();
       })();
-
-      // results.forEach((doc) => {
-      //   totalPosts++;
-      //   const blog = doc.data();
-      //   totalViews += blog.views;
-      //   totalComments += blog.commentsCount;
-      //   totalLikes += blog.likes;
-
-      //   html += `<div class="each-post">
-      //   <div class="post-img">
-      //     <img src="${blog.image}" />
-      //   </div>
-      //   <div class="posts-tags">
-      //     <p class="tech">
-      //       <i class="fa fa-tags" aria-hidden="true"></i
-      //       ><span class="tech">Tech</span>
-      //     </p>
-      //     <p class="business">
-      //       <i class="fa fa-tags" aria-hidden="true"></i
-      //       ><span class="business">Business</span>
-      //     </p>
-      //   </div>
-      //   <a href="../blog/readblog.html?id=${doc.id}")><h3 class="post-title">
-      //   ${blog.title}
-      //   </h3></a>
-      //   <p class="time"><em> ${moment(blog.time).fromNow()}</em></p>
-
-      //   <div class="bottom-icons">
-      //     <p class="each-icon">
-      //       <i class="fa fa-commenting-o" aria-hidden="true"></i
-      //       ><span class="right">${blog.commentsCount}</span>
-      //     </p>
-      //     <p class="each-icon">
-      //       <i class="fa fa-eye" aria-hidden="true"></i>
-      //       <span class="right">${blog.views}</span>
-      //     </p>
-      //     <p class="each-icon">
-      //       <i class="fa fa-heart" aria-hidden="true"></i>
-      //       <span class="right">${blog.likes}</span>
-      //     </p>
-      //   </div>
-      //   <div class="post-options">
-      //    <a href="./editPost.html?id=${
-      //      doc.id
-      //    }"> <button class="edit">Edit</button></a>
-      //     <button class="delete" onclick="deletePost('${
-      //       doc.id
-      //     }')">Delete</button>
-      //   </div>
-      // </div>`;
-      // });
-      // postsContainer.innerHTML = html;
-      // document.querySelector('#views').textContent = totalViews;
-      // document.querySelector('#likes').textContent = totalLikes;
-      // document.querySelector('#comments').textContent = totalComments;
-      // document.querySelector('#posts').textContent = totalPosts;
-
-      // disableLoader();
-      // });
 
       db.collection('Queries').onSnapshot((queries) => {
         queries.forEach((querie) => {
           totalQueries++;
         });
-        document.querySelector('#queries').textContent = totalQueries;
+        document.querySelectorAll('#queries').forEach((item) => {
+          item.textContent = totalQueries;
+        });
       });
 
       (async () => {
@@ -300,15 +282,17 @@
         subscribers.data.subscribers.forEach((sub) => {
           totalSubscribers++;
         });
-        document.querySelector('#subscribers').textContent = totalSubscribers;
+        document.querySelectorAll('#subscribers').forEach((item) => {
+          item.textContent = totalSubscribers;
+        });
       })();
 
-      // db.collection('Subscribers').onSnapshot((subscribers) => {
-      //   subscribers.forEach((subscriber) => {
-      //     totalSubscribers++;
-      //     document.querySelector('#subscribers').textContent = totalSubscribers;
-      //   });
-      // });
+      document.querySelector('.over-btn').addEventListener('click', () => {
+        document.querySelector('.hidden-over').classList.toggle('none');
+      });
+      document.querySelector('.close-btn').addEventListener('click', () => {
+        document.querySelector('.hidden-over').classList.toggle('none');
+      });
     </script>
   </body>
 </html>

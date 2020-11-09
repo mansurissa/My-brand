@@ -34,48 +34,66 @@
         <div class="line"></div>
       </div>
     </nav>
-
+    <div class="loader-container">
+      <div id="preloader">
+        <div id="loader"></div>
+      </div>
+    </div>
     <section class="page-container">
-      <div class="right-posts-container">
-        <div class="post-read"></div>
-        <p class="like">
-          <i class="fa fa-thumbs-o-up" aria-hidden="true"></i
-          ><span class="right">0</span>
-        </p>
-        <div class="call-to-subscribe">
-          <p class="sub-text">
-            Get notified on a new post. <span>No spam, ever</span>
-          </p>
-          <div class="subscribe">
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter Your Email.."
-              class="email-input"
-            />
-            <button class="sub-btn" type="button">Subscribe</button>
+      <div class="post-read"></div>
+      <p class="like-btn">
+        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+        <span class="right-num">0</span>
+      </p>
+
+      <section class="subscribe-sec">
+        <div class="subscribe_header">
+          <h3>Subsribe To My Newsletter</h3>
+          <p>You will not be spamed ever..</p>
+          <button class="button special-link shadow-btn">
+            <a href="#00" id="subscribe_btn" class="special-link">Subscribe</a>
+          </button>
+        </div>
+        <div class="bg-modal" id="bg-modal">
+          <div class="modal-contents">
+            <div class="close">+</div>
+            <form class="white-input">
+              <input
+                type="email"
+                placeholder="Please enter your e-mail"
+                class="email-input"
+              />
+              <button class="button special-link shadow-btn">
+                <a href="#000" class="sub-btn">Subscribe</a>
+              </button>
+            </form>
           </div>
         </div>
+      </section>
+      <div class="success"></div>
 
-        <h2 class="title-main comments-title">Please leave a Comment</h2>
+      <h2 class="title-main comments-title">Please leave a Comment</h2>
 
-        <section class="comments-section">
-          <div class="commentsForm"></div>
+      <section class="comments-section">
+        <div class="commentsForm">
           <textarea
             type="text"
             class="comment-input"
             placeholder="Your Comment here.."
           ></textarea>
-          <button class="submit" onclick="addComment()">Comment</button>
-        </section>
 
-        <h2 class="title-main comments-title">Comments from vistors</h2>
-        <section class="comments-container"></section>
-      </div>
+          <button class="submit" onclick="addComment('${post._id}')">
+            Comment
+          </button>
+        </div>
+      </section>
+
+      <h2 class="title-main comments-title">Comments from vistors</h2>
+      <section class="comments-container"></section>
     </section>
 
     <footer>
-      <h2 class="title-footer">Follow Us On</h2>
+      <h2 class="title-main">Follow Us On</h2>
       <ul class="socials">
         <li class="each-li">
           <a href="https://github.com/mansurissa" target="_blank"
@@ -99,24 +117,17 @@
     </footer>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
-    <!-- <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
     <script src="../js/firebase.js"></script>
     <script src="../js/app.js"></script>
 
     <script>
-      // const db = firebase.firestore();
       const postRead = document.querySelector('.post-read');
       const commentsContainer = document.querySelector('.comments-container');
       const subscribe = document.querySelector('.sub-btn');
       const subInput = document.querySelector('.email-input');
       const postId = location.href.split('?id=')[1];
-
-      // db.collection('Posts')
-      //   .doc(postId)
-      //   .update({ views: increment })
-      //   .catch(console.log);
 
       (async () => {
         const res = await fetch(
@@ -130,36 +141,44 @@
                 <h2 class="title onRead-title">
                   ${post.title}
                 </h2>
+                <p class="time"><em>${moment(post.time).fromNow()}</em></p>
                 <img src="${post.imageUrl}" alt="" class="post-img" />
-                
+
                 <div class="onRead-post">
                   <p>
                     ${post.body}
                   </p>
                 </div>
+
                 `;
-        document.querySelector('.like .right').textContent = post.likes;
+        document.querySelector('.right-num').textContent = post.likes;
         postRead.innerHTML = html;
+        disableLoader();
       })();
-      // db.collection('Posts')
-      //   .doc(postId)
-      //   .onSnapshot((doc) => {
-      //     let html = '';
-      //     const blog = doc.data();
-      //     html += `
-      //     <img src="${blog.image}" alt="" />
-      //     <h2 class="title onRead-title">
-      //       ${blog.title}
-      //     </h2>
-      //     <div class="onRead-post">
-      //       <p>
-      //         ${blog.body}
-      //       </p>
-      //     </div>
-      //     `;
-      //     document.querySelector('.like .right').textContent = blog.likes;
-      //     postRead.innerHTML = html;
-      //   });
+
+      (async () => {
+        const res = await fetch(
+          `https://issa-portfolio-brand.herokuapp.com/blogs/${postId}/allComments`,
+        );
+        const comments = await res.json();
+        console.log(comments.data);
+        let html = '';
+        comments.data.forEach((comment) => {
+          html += `
+           <div class="each-comment">
+                  <div class="comment-details">
+                    <p class="author">--<em>${comment.name}</em>--</p>
+                    <p class="comment-time"> ${moment(
+                      comment.time,
+                    ).fromNow()}</p>
+                  </div>
+                  <p class="commentPara">
+                    ${comment.message}
+                  </p>
+                </div>`;
+        });
+        commentsContainer.innerHTML = html;
+      })();
 
       function addComment() {
         const comment = document.querySelector('.comment-input');
@@ -179,68 +198,7 @@
             );
             await location.reload();
           })();
-
-        // db.collection('Posts')
-        //   .doc(postId)
-        //   .collection('Comments')
-        //   .add({
-        //     comment: comment.value,
-        //     author: 'Anonymous',
-        //     time: Date.now(),
-        //   })
-        //   .then(() => {
-        //     comment.textContent = '';
-        //     db.collection('Posts')
-        //       .doc(postId)
-        //       .update({ commentsCount: increment })
-        //       .catch(console.log);
-        //   });
       }
-
-      (async () => {
-        const res = await fetch(
-          `https://issa-portfolio-brand.herokuapp.com/blogs/${postId}/allComments`,
-        );
-        const comments = await res.json();
-        let html = '';
-        comments.data.forEach((comment) => {
-          html += `
-           <div class="each-comment">
-                  <div class="comment-details">
-                    <p class="author">--<em>${comment.name}</em>--</p>
-                    <p class="comment-time"> ${moment(
-                      comment.time,
-                    ).fromNow()}</p>
-                  </div>
-                  <p class="commentPara">
-                    ${comment.message}
-                  </p>
-                </div>`;
-        });
-        commentsContainer.innerHTML = html;
-      })();
-
-      // db.collection('Posts')
-      //   .doc(postId)
-      //   .collection('Comments')
-      //   .onSnapshot((results) => {
-      //     let html = '';
-      //     results.forEach((doc) => {
-      //       const comment = doc.data();
-      //       html += ` <div class="each-comment">
-      //             <div class="comment-details">
-      //               <p class="author">--<em>${comment.author}</em>--</p>
-      //               <p class="comment-time"> ${moment(
-      //                 comment.time,
-      //               ).fromNow()}</p>
-      //             </div>
-      //             <p class="commentPara">
-      //               ${comment.comment}
-      //             </p>
-      //           </div>`;
-      //     });
-      //     commentsContainer.innerHTML = html;
-      //   });
 
       subscribe.addEventListener('click', async () => {
         console.log('clicked');
@@ -255,22 +213,12 @@
             }),
           },
         );
-        const subscriber = await res.json();
-        console.log(subscriber);
-
-        // db.collection("Subscribers")
-        //   .add({
-        //     email: subInput.value,
-        //   })
-        //   .then(() => {
-        //     subInput = "";
-        //   })
-        //   .catch((err) => console.log(err));
-
-        // =========================================
+        document.querySelector(
+          '.success',
+        ).innerHTML = `<p class="success"><i class="fa fa-check" aria-hidden="true"></i>Successfully subscribed!</p>`;
       });
 
-      const like = document.querySelector('.like');
+      const like = document.querySelector('.like-btn');
 
       like.addEventListener('click', async () => {
         await fetch(
@@ -280,10 +228,6 @@
             headers: { 'content-Type': 'application/json' },
           },
         );
-
-        // db.collection('Posts').doc(postId).update({
-        //   likes: increment,
-        // });
       });
     </script>
   </body>

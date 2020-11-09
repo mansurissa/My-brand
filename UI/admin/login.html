@@ -13,16 +13,16 @@
   </head>
   <body class="login">
     <form class="login-page" method="POST">
-      <h1 class="title-login">LOGIN</h1>
+      <h1 class="title-login title-contact">LOGIN</h1>
       <input type="email" name="email" placeholder="Please enter your email" />
       <input
         type="password"
         name="password"
         placeholder="Please enter your passwords"
       />
-      <button class="loginbtn" type="submit">LOGIN</button>
+      <button class="button special-link" type="submit">LOGIN</button>
 
-      <ul class="social-login">
+      <ul class="social-login socials">
         <li class="each-social">
           <a href="#" onclick="oAuth2Login('google')"
             ><i class="fa fa-google" aria-hidden="true"></i
@@ -48,21 +48,21 @@
       auth = firebase.auth();
       auth.onAuthStateChanged((user) => {
         if (user) {
-          location.href = "dashboard.html";
+          location.href = 'dashboard.html';
         }
       });
 
-      const form = document.querySelector(".login-page");
-      form.addEventListener("submit", (e) => {
+      const form = document.querySelector('.login-page');
+      form.addEventListener('submit', (e) => {
         e.preventDefault();
         auth
           .signInWithEmailAndPassword(form.email.value, form.password.value)
           .catch(console.log);
       });
       const Providers = {
-        google: "GoogleAuthProvider",
-        github: "GithubAuthProvider",
-        fb: "FacebookAuthProvider",
+        google: 'GoogleAuthProvider',
+        github: 'GithubAuthProvider',
+        fb: 'FacebookAuthProvider',
       };
       function oAuth2Login(src) {
         const provider = new firebase.auth[Providers[src]]();
