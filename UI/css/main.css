@@ -214,6 +214,9 @@ header {
   justify-content: space-between;
   align-items: center;
 }
+.post-read {
+  margin: 0 1rem;
+}
 .skill {
   border-radius: 20px;
   background: var(--special);
@@ -907,6 +910,12 @@ textarea {
   .over-btn {
     display: block;
     cursor: pointer;
+  }
+  .skill {
+    width: 18.4rem;
+  }
+  .about {
+    margin: 3rem 1rem;
   }
 
   .contact-page {
